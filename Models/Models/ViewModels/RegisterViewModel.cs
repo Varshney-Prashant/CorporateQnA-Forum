@@ -1,4 +1,4 @@
-﻿namespace Models.Models.ViewModels
+﻿namespace CorporateQnAModels.Models.ViewModels
 {
     public class RegisterViewModel
     {

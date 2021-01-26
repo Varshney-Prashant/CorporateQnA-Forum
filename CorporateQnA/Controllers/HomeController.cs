@@ -1,4 +1,4 @@
-﻿using Models.Models.AuthenticationModels;
+﻿using CorporateQnAModels.Models.AuthenticationModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;

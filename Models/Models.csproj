@@ -114,9 +114,9 @@
     <Compile Include="Models\AuthenticationModels\ApplicationUserManager.cs" />
     <Compile Include="Models\AuthenticationModels\ApplicationUserStore.cs" />
     <Compile Include="Models\AuthenticationModels\AuthenticationContext.cs" />
-    <Compile Include="Models\CoreModels\AnswerDTO.cs" />
-    <Compile Include="Models\CoreModels\CategoryDTO.cs" />
-    <Compile Include="Models\CoreModels\QuestionDTO.cs" />
+    <Compile Include="Models\CoreModels\Answer.cs" />
+    <Compile Include="Models\CoreModels\Category.cs" />
+    <Compile Include="Models\CoreModels\Question.cs" />
     <Compile Include="Models\Enums\QuestionStatus.cs" />
     <Compile Include="Models\DataModels\Database.cs">
       <AutoGen>True</AutoGen>

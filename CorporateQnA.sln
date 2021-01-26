@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CorporateQnA", "CorporateQnA\CorporateQnA.csproj", "{7C52F9F3-30D9-43EE-BA6D-25FCDA4E2780}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Models", "Models", "{21BB201A-922C-42C3-AC1C-5F9AB50816D1}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CorporateQnAModels", "CorporateQnAModels", "{21BB201A-922C-42C3-AC1C-5F9AB50816D1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{BEB09437-4263-495B-A81C-05905E153938}"
 EndProject

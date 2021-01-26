@@ -7,7 +7,7 @@ namespace CorporateQnA.App_Start
     using CorporateQnA.Services.AuthenticationService;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
-    using Models.Models.AuthenticationModels;
+    using CorporateQnAModels.Models.AuthenticationModels;
     using SimpleInjector;
     using SimpleInjector.Integration.WebApi;
     using SimpleInjector.Lifestyles;

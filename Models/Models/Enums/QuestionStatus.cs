@@ -1,4 +1,4 @@
-﻿namespace Models.Models.Enums
+﻿namespace CorporateQnAModels.Models.Enums
 {
     public enum QuestionStatus
     {

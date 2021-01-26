@@ -2,12 +2,14 @@
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.IdentityModel.Tokens;
-using Models.Models.AuthenticationModels;
-using Models.Models.ViewModels;
+using CorporateQnAModels.Models.AuthenticationModels;
+using CorporateQnAModels.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -64,14 +66,13 @@ namespace CorporateQnA.Services.AuthenticationService
         public async Task<Object> Login(LoginViewModel loginCreds)
         {
             loginCreds.EmailId = "TestUser@test.com";
-            loginCreds.Password = "Prashant@29ap";
+            loginCreds.Password = "Pnt@29ap";
             var user = await UserManager.FindByEmailAsync(loginCreds.EmailId);
 
             TokenViewModel Token = new TokenViewModel { Name = user.FullName, UserId = user.Id };
 
             if (user != null && await UserManager.CheckPasswordAsync(user, loginCreds.Password))
             {
-                /*var signInResult = await SignInManager.PasswordSignInAsync(user, loginCreds.Password, false, false);*/
                 string key = "my_secret_key_12345";
                 var issuer = "http://mysite.com";
                 var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));
@@ -81,10 +82,6 @@ namespace CorporateQnA.Services.AuthenticationService
                 {
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                     new Claim("UserId",user.Id.ToString()),
-                    /*new Claim(options.ClaimsIdentity.RoleClaimType,role.FirstOrDefault())*/
-                    new Claim("valid", "1"),
-                    new Claim("userid", "1"),
-                    new Claim("name", "bilal")
                 };
 
                 var token = new JwtSecurityToken(issuer,
@@ -93,15 +90,15 @@ namespace CorporateQnA.Services.AuthenticationService
                                 expires: DateTime.Now.AddHours(1),
                                 signingCredentials: credentials);
                 Token.AccessToken = new JwtSecurityTokenHandler().WriteToken(token);
-
-               /* var TokenHandler = new JwtSecurityTokenHandler();
-                var SecurityToken = TokenHandler.CreateToken(TokenDescriptor);
-                Token.AccessToken = TokenHandler.WriteToken(SecurityToken);*/
-                return Ok(new { Token });
+                return new { Token };
             }
             else
             {
-                return BadRequest();
+                /*return HttpStatusCode.BadRequest;*/
+                Request = new System.Net.Http.HttpRequestMessage();
+                HttpResponseMessage response =
+                this.Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Invalid Credentials");
+                throw new HttpResponseException(response);
             }
         }
     }

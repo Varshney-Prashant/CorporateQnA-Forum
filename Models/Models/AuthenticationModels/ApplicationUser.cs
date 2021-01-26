@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
 
-namespace Models.Models.AuthenticationModels
+namespace CorporateQnAModels.Models.AuthenticationModels
 {
     public class ApplicationUser:IdentityUser
     {

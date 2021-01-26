@@ -13,11 +13,9 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using PetaPoco;
 
-namespace Models.Models.DataModels
+namespace CorporateQnAModels.Models.DataModels
 {
 
 	public partial class CorporateQNADB : Database

@@ -1,5 +1,5 @@
 ﻿using CorporateQnA.Services.AuthenticationService;
-using Models.Models.ViewModels;
+using CorporateQnAModels.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,7 +30,8 @@ namespace CorporateQnA.Controllers
         [Route("login")]
         public async Task<Object> Login()
         {
-            return await AuthenticationService.Login(new LoginViewModel());
+            var x= await AuthenticationService.Login(new LoginViewModel());
+            return x;
         }
     }
 }
