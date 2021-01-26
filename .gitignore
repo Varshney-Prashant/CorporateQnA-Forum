@@ -1,0 +1,10 @@
+bin/
+packages/
+obj/
+Import Schema Logs/
+CorporateQnADB.dbmdl/
+CorporateQnADB.jfm/
+Content/
+fonts/
+properties/
+Scripts/
