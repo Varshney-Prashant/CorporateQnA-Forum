@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AutoMapper;
+using CorporateQnAModels.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -18,8 +20,19 @@ namespace CorporateQnA
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-
+            InitializeMapping();
+            /*CorporateQnAMapping.Init();*/
             GlobalConfiguration.Configuration.Formatters.Remove(GlobalConfiguration.Configuration.Formatters.XmlFormatter);
+        }
+
+        private static void InitializeMapping()
+        {
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile(new CorporateQnAMapping());
+            });
+            CorporateQnAMapping.Mapper = new Mapper(config);
+
         }
     }
 }

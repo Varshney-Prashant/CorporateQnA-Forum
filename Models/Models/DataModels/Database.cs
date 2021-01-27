@@ -112,7 +112,6 @@ namespace CorporateQnAModels.Models.DataModels
 
 	[TableName("dbo.Answers")]
 	[PrimaryKey("Id")]
-	[ExplicitColumns]
 
     public partial class Answer : CorporateQNADB.Record<Answer>  
     {
@@ -132,7 +131,6 @@ namespace CorporateQnAModels.Models.DataModels
 
 	[TableName("dbo.AspNetUsers")]
 	[PrimaryKey("Id", AutoIncrement=false)]
-	[ExplicitColumns]
 
     public partial class AspNetUser : CorporateQNADB.Record<AspNetUser>  
     {
@@ -160,7 +158,6 @@ namespace CorporateQnAModels.Models.DataModels
 
 	[TableName("dbo.Categories")]
 	[PrimaryKey("Id")]
-	[ExplicitColumns]
 
     public partial class Category : CorporateQNADB.Record<Category>  
     {
@@ -176,7 +173,6 @@ namespace CorporateQnAModels.Models.DataModels
 
 	[TableName("dbo.Questions")]
 	[PrimaryKey("Id")]
-	[ExplicitColumns]
 
     public partial class Question : CorporateQNADB.Record<Question>  
     {

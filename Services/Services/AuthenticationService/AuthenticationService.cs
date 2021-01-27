@@ -66,16 +66,15 @@ namespace CorporateQnA.Services.AuthenticationService
         public async Task<Object> Login(LoginViewModel loginCreds)
         {
             loginCreds.EmailId = "TestUser@test.com";
-            loginCreds.Password = "Pnt@29ap";
+            loginCreds.Password = "Prashant@29ap";
             var user = await UserManager.FindByEmailAsync(loginCreds.EmailId);
 
             TokenViewModel Token = new TokenViewModel { Name = user.FullName, UserId = user.Id };
 
             if (user != null && await UserManager.CheckPasswordAsync(user, loginCreds.Password))
             {
-                string key = "my_secret_key_12345";
-                var issuer = "http://mysite.com";
-                var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));
+                var key = Encoding.UTF8.GetBytes(System.Configuration.ConfigurationManager.AppSettings["SecretKey"].ToString());
+                var securityKey = new SymmetricSecurityKey(key);
                 var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
                 var permClaims = new List<Claim>
@@ -84,9 +83,8 @@ namespace CorporateQnA.Services.AuthenticationService
                     new Claim("UserId",user.Id.ToString()),
                 };
 
-                var token = new JwtSecurityToken(issuer,
-                                issuer,
-                                permClaims,
+                var token = new JwtSecurityToken(
+                                claims: permClaims,
                                 expires: DateTime.Now.AddHours(1),
                                 signingCredentials: credentials);
                 Token.AccessToken = new JwtSecurityTokenHandler().WriteToken(token);
@@ -95,7 +93,7 @@ namespace CorporateQnA.Services.AuthenticationService
             else
             {
                 /*return HttpStatusCode.BadRequest;*/
-                Request = new System.Net.Http.HttpRequestMessage();
+                Request = new HttpRequestMessage();
                 HttpResponseMessage response =
                 this.Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Invalid Credentials");
                 throw new HttpResponseException(response);
