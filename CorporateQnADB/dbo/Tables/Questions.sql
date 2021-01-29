@@ -4,6 +4,7 @@
     [Description] NVARCHAR (MAX) NOT NULL,
     [Status]      SMALLINT       NOT NULL,
     [PostingTime] DATETIME       NOT NULL,
+    [AnswersCount] INT NOT NULL DEFAULT 0, 
     [UserId]      NVARCHAR (450) NOT NULL,
     [CategoryId]  INT            NOT NULL,
     [IsDeleted]   BIT            CONSTRAINT [DF_Questions_IsDeleted] DEFAULT ((0)) NOT NULL,
