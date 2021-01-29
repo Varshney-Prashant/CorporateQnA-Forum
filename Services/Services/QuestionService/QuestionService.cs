@@ -16,7 +16,8 @@ namespace CorporateQnA.Services.QuestionService
         public IEnumerable<CorporateQnAModels.Models.CoreModels.Question> GetQuestions()
         {
             List<CorporateQnAModels.Models.DataModels.Question> questions = db.Fetch<CorporateQnAModels.Models.DataModels.Question>("SELECT * FROM Questions WHERE IsDeleted=0");
-            return questions.MapCollectionTo<CorporateQnAModels.Models.DataModels.Question, CorporateQnAModels.Models.CoreModels.Question>();
+            var x= questions.MapCollectionTo<CorporateQnAModels.Models.DataModels.Question, CorporateQnAModels.Models.CoreModels.Question>();
+            return x;
         }
 
         public CorporateQnAModels.Models.CoreModels.Question GetQuestion(int id)
@@ -25,6 +26,23 @@ namespace CorporateQnA.Services.QuestionService
                                                                         @"SELECT * FROM Questions WHERE IsDeleted=0 AND Id=@id",
                                                                         new { id });
             return question.MapTo<CorporateQnAModels.Models.CoreModels.Question>();
+        }
+
+        public Models.Models.ViewModels.QuestionWithUserViewModel GetQuestionWithUser(int id)
+        {
+            var x= db.SingleOrDefault<CorporateQnAModels.Models.DataModels.QuestionWithUserViewModel>(
+                    @"SELECT * FROM QuestionWithUserView WHERE QuestionId=@id",
+                    new { id }
+                    ).MapTo<Models.Models.ViewModels.QuestionWithUserViewModel>();
+            return x;
+        }
+
+        public Models.Models.ViewModels.QuestionWithUserViewModel GetQuestionsByCategoryId(int id)
+        {
+            return db.SingleOrDefault<CorporateQnAModels.Models.DataModels.QuestionWithUserViewModel>(
+                    @"SELECT * FROM QuestionWithUserView WHERE QuestionId=@id",
+                    new { id }
+                    ).MapTo<Models.Models.ViewModels.QuestionWithUserViewModel>();
         }
 
         public int PostQuestion(CorporateQnAModels.Models.CoreModels.Question question)

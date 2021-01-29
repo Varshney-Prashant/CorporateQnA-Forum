@@ -126,7 +126,9 @@
     </Compile>
     <Compile Include="Models\CorporateQnAMapping.cs" />
     <Compile Include="Models\PetaPoco.cs" />
+    <Compile Include="Models\ViewModels\AnswerWithUserViewModel.cs" />
     <Compile Include="Models\ViewModels\LoginViewModel.cs" />
+    <Compile Include="Models\ViewModels\QuestionWithUserViewModel.cs" />
     <Compile Include="Models\ViewModels\RegisterViewModel.cs" />
     <Compile Include="Models\ViewModels\TokenViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

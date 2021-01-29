@@ -1,5 +1,6 @@
 ﻿using CorporateQnA.Services.AnswerService;
 using CorporateQnAModels.Models.CoreModels;
+using CorporateQnAModels.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +29,12 @@ namespace CorporateQnA.Controllers
         public Answer Get(int id)
         {
             return AnswerService.GetAnswer(id);
+        }
+
+        [Route("answerWithUser/{id}")]
+        public IEnumerable<AnswerWithUserViewModel> GetAnswerWithUser(int id)
+        {
+            return AnswerService.GetAnswerWithUser(id);
         }
 
         [Route("add")]

@@ -36,15 +36,15 @@ namespace CorporateQnA.Services.AuthenticationService
         {
             var user = new ApplicationUser
             {
-                UserName = "TestUser3",
-                Email = "TestUser@test.com",
-                FullName = "Test",
-                Designation = "TestHead",
-                Company = "Test",
+                UserName = registerCreds.EmailId,
+                Email = registerCreds.EmailId,
+                FullName = registerCreds.Name,
+                Designation = registerCreds.Designation,
+                Company = registerCreds.Company,
                 NoOfLikes = 0,
                 NoOfDislikes = 0
             };
-            registerCreds.Password = "Prashant@29ap";
+            /*registerCreds.Password = "Prashant@29ap";*/
             /*            registerCreds.Role = "Customer";*/
             var Result = await UserManager.CreateAsync(user, registerCreds.Password);
 

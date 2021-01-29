@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using DataModels = CorporateQnAModels.Models.DataModels;
 
 namespace CorporateQnA.Services.AnswerService
 {
@@ -16,13 +17,21 @@ namespace CorporateQnA.Services.AnswerService
 
         public IEnumerable<CorporateQnAModels.Models.CoreModels.Answer> GetAnswers()
         {
-            List<CorporateQnAModels.Models.DataModels.Answer> answers = db.Fetch<CorporateQnAModels.Models.DataModels.Answer>("SELECT * FROM Answers WHERE IsDeleted=0");
-            return answers.MapCollectionTo<CorporateQnAModels.Models.DataModels.Answer, CorporateQnAModels.Models.CoreModels.Answer>();
+            List<DataModels.Answer> answers = db.Fetch<DataModels.Answer>("SELECT * FROM Answers WHERE IsDeleted=0");
+            return answers.MapCollectionTo<DataModels.Answer, CorporateQnAModels.Models.CoreModels.Answer>();
+        }
+
+        public IEnumerable<CorporateQnAModels.Models.ViewModels.AnswerWithUserViewModel> GetAnswerWithUser(int id)
+        {
+            return db.Fetch<DataModels.AnswerWithUserViewModel>(
+                    @"SELECT * FROM AnswerWithUserView WHERE QuestionId=@id ORDER BY NoOfLikes DESC, NoOfDisLikes",
+                    new { id }
+                    ).MapCollectionTo<DataModels.AnswerWithUserViewModel, CorporateQnAModels.Models.ViewModels.AnswerWithUserViewModel>();
         }
 
         public CorporateQnAModels.Models.CoreModels.Answer GetAnswer(int id)
         {
-            CorporateQnAModels.Models.DataModels.Answer answer = db.SingleOrDefault<CorporateQnAModels.Models.DataModels.Answer>(
+            DataModels.Answer answer = db.SingleOrDefault<DataModels.Answer>(
                                                                     @"SELECT * FROM Answers WHERE IsDeleted=0 AND Id=@id",
                                                                     new { id });
             return answer.MapTo<CorporateQnAModels.Models.CoreModels.Answer>();
@@ -31,23 +40,23 @@ namespace CorporateQnA.Services.AnswerService
         public int PostAnswer(CorporateQnAModels.Models.CoreModels.Answer answer)
         {
             return Convert.ToInt32(db.Insert(
-                answer.MapTo<CorporateQnAModels.Models.DataModels.Answer>())
+                answer.MapTo<DataModels.Answer>())
                 );
         }
 
         public void PutAnswer(int id, CorporateQnAModels.Models.CoreModels.Answer answer)
         {
-            var currentAnswer = db.SingleOrDefault<CorporateQnAModels.Models.DataModels.Answer>(id)
+            var currentAnswer = db.SingleOrDefault<DataModels.Answer>(id)
                                   .MapTo<CorporateQnAModels.Models.CoreModels.Answer>();
             if (currentAnswer != null)
             {
-                db.Update(answer.MapTo<CorporateQnAModels.Models.DataModels.Answer>());
+                db.Update(answer.MapTo<DataModels.Answer>());
             }
         }
 
         public void DeleteAnswer(int id)
         {
-            var answer = db.SingleOrDefault<CorporateQnAModels.Models.DataModels.Answer>(id)
+            var answer = db.SingleOrDefault<DataModels.Answer>(id)
                            .MapTo<CorporateQnAModels.Models.CoreModels.Answer>();
             if (answer != null)
             {

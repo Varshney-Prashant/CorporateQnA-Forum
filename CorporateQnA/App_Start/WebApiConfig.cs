@@ -1,4 +1,6 @@
 ﻿using Microsoft.Owin.Security.OAuth;
+using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +17,10 @@ namespace CorporateQnA
             config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
             // Web API routes
             config.MapHttpAttributeRoutes();
+
+            config.Formatters.JsonFormatter.SerializerSettings.ContractResolver =
+            new DefaultContractResolver { NamingStrategy = new CamelCaseNamingStrategy() };
+            config.Formatters.JsonFormatter.SerializerSettings.Converters.Add(new StringEnumConverter());
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",

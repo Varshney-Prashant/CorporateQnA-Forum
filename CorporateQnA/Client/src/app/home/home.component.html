@@ -1,0 +1,89 @@
+<div class="container-fluid mx-0 px-0 py-0 my-0">
+     <div class="home-options">
+          <div class="d-sm-flex pt-2 pl-4 pb-0 justify-content-between">
+               <div class="form-group mr-3">
+                    <label for="keywords" class="home-options-heading">Keywords</label>
+                    <input type="text" name="search" [(ngModel)]="searchText.title" class="form-control keyword-search" placeholder="&#xF002; Search" >
+               </div>
+               <div class="form-group category-dropdown mr-3">
+                    <label for="keywords" class="home-options-heading">Category</label>
+                    <select class="form-control" id=category [(ngModel)]="categoryId" (change)="categorySelected()">
+                         <option value=0 selected>ALL</option>
+                         <option *ngFor="let category of categories" value="{{category.id}}">{{category.name}}</option>
+                    </select>
+               </div>
+               <div class="form-group category-dropdown mr-3">
+                    <label for="keywords" class="home-options-heading">Show</label>
+                    <select class="form-control" id=show [(ngModel)]="showFilter" (change)="showFilterSelected()">
+                         <option value="all">ALL</option>
+                         <option value="myQuestions">My Questions</option>
+                         <option value="myParticipation">My Participation</option>
+                         <option value="hot">Hot</option>
+                         <option value="solved">Solved</option>
+                         <option value="unsolved">UnSolved</option>
+                    </select>
+               </div>
+               <div class="form-group category-dropdown mr-3">
+                    <label for="keywords" class="home-options-heading">Sort By</label>
+                    <select class="form-control" id=sort [(ngModel)]="sortByFilter" (change)="sortBySelected()">
+                         <option value="all">ALL</option>
+                         <option value="recent">Recent</option>
+                         <option value="last10Days">Last 10 Days</option>
+                         <option value="last30Days">Last 30 Days</option>
+                    </select>
+               </div>
+               <div class="reset-icon ml-3 mr-3" (click)="resetFilters()">
+                    <i class="fas fa-undo"> Reset</i>
+               </div>
+               <div class="mr-3">
+                    <button class="add-question btn btn-primary">+Question</button>
+               </div>
+          </div>
+     </div>
+     <div class="home-main-container">
+          <div class="m-3 home-main d-sm-flex">
+               <div class="col-sm-6 px-0 home-left-container">
+                    <div class="question-container" *ngFor="let question of questions | filterBy:searchText"  (click)="selected(question)" [ngClass]="{'active-question': selectedQuestion == question}">
+                         <div class="d-sm-flex pt-3 pl-2 pr-3">
+                              <img src="img_avatar.png" class="avatar-image ml-3">
+                              <div class="ml-3 pl-2 question-title">{{question.title}}?</div>
+                         </div>
+                         <div class="font-size-12 question-description ml-5 pl-3 pr-3 mb-3 app-color font-arial">
+                              {{question.description}}
+                         </div>
+                         <div class="d-sm-flex">
+                              <div class="arrow-up ml-3 pl-2">
+                                   <i class="arrow up"></i>
+                                   <div class="upvotes">33</div>
+                              </div>
+                         </div>
+                         <div class="d-sm-flex justify-content-between  ml-5 pl-3 pr-3 mb-3">
+                              <div class="d-sm-flex">
+                                   <i class="fa fa-eye mr-3" aria-hidden="true"> <span class="font-size-12 ml-1 font-arial app-color">Views</span></i>
+                                   <div class="answerCount font-size-12 px-1">
+                                        {{question.answersCount}} Answers
+                                   </div>
+                              </div>
+                              <div class="pr-3">
+                                   {{question.postingTime}}}
+                              </div>
+
+                         </div>
+                    </div>
+               </div>
+               <div class="col-sm-6 px-0">
+                    <div *ngIf="!questionSelected" class="right-container">
+                         <div class="text-center ">
+                              <i class="fas fa-arrow-left arrow-icon"></i>
+                         </div>
+                         <div class="font-size-28 text-center">
+                              Select a Question to See Details
+                         </div>
+                    </div>
+                    <div *ngIf="questionSelected" class="right-container">
+                         <router-outlet></router-outlet>
+                    </div>
+               </div>               
+          </div>
+     </div>
+</div>

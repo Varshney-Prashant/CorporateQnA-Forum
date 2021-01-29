@@ -1,0 +1,206 @@
+*:not(div):focus {
+     outline: 0;
+   }
+
+.title-bar{
+     background-color: rgb(118,97,139);
+     height: 50px;
+}
+.keka-logo{
+     background-color: rgb(82,67,97);
+     width: 100px;
+     padding: 10px 10px 14px 10px;
+}
+.top-menu{
+     padding: 10px 10px 14px 10px;
+}
+.left-nav{
+     background-color: rgb(62,66,73);
+     width: 100px;
+     bottom: 0;
+     position: relative;
+     top: 0;
+     height:100%;
+}
+.font-size-14{
+     font-size: 14px;
+}
+.font-size-12{
+     font-size: 12px;
+}
+.forum-icon{
+     padding: 15px 0px 0px 20px;
+}
+/* .app-container{
+     margin-left: 100px;
+} */
+.top-nav{
+     height: 44px;
+     background-color: #fff;
+     box-shadow: 3px 0px 6px 0px #d8dde6;
+     border-bottom: 2px solid rgb(212,215,220);
+}
+a{
+     color: white;
+     cursor: pointer;
+}
+a:hover{
+     text-decoration: none;
+     color:white
+}
+.top-nav li{
+     position: relative;
+     padding-top: 12px;
+     padding-left: 5px;
+}
+.top-nav-link, .top-nav-link:hover{
+     color: rgb(134,134,134) !important;
+     font-size: 12px;
+     font-weight: 600;
+}
+.active a{
+     color: rgb(35,35,35) !important;
+     font-size: 12px;
+     font-weight: 600;
+}
+.top-nav.nav li a:after {
+     content: '';
+     position: absolute;
+     bottom: -1px;
+     border-left: 7px solid transparent;
+     border-right: 7px solid transparent;
+     border-bottom: 7px solid;
+     transition: 0.3s;
+     opacity: 0;
+     left: 6%;
+     border-bottom-color: rgb(118,97,139)
+ }
+.top-nav li.active a:after{
+    opacity: 1;
+    left: 40%;
+}
+.home-options{
+     background-color: rgb(248,248,249);
+     border-bottom: 2px solid rgb(212,215,220);
+}
+.home-options-heading{
+     font-size: small;
+     font-weight: 500;
+     color: rgb(93,93,94);
+}
+.keyword-search{
+     font-family:Arial, FontAwesome;
+     width: 300px;
+}
+
+#category{
+     width: 250px;
+}
+
+.reset-icon{
+     padding-top: 35px;
+}
+
+.add-question{
+     background-color:  rgb(118,97,139);
+     border: 0;
+     margin-top: 30px;
+     
+}
+
+.home-main-container{
+     background-color: rgb(244,245,248);
+     padding-top: 1px;
+     padding-bottom: 1px;
+}
+.home-main{
+     background-color: white;
+     border: 1px solid rgb(212,215,220);
+     border-radius: 5px;
+}
+.question-container{
+     border-bottom: 1px solid rgb(212,215,220);
+     
+}
+.home-left-container{
+     border-right: 1px solid rgb(212,215,220);
+}
+.avatar-image {
+     border-radius: 50%;
+}
+.font-weight-500{
+     font-weight: 500;
+}
+.font-size-16{
+     font-size: 16px;
+}
+.question-title{
+     font-size: 14px;
+     font-weight: 500;
+     color: black;
+}
+.question-description{
+     font-weight: 500;
+}
+.active-question{
+     background-image: linear-gradient(to left, rgb(118,97,139) 0.1%, rgb(118,97,139) 0.4%, rgb(242,241,240) 0.6%, rgb(242,241,240) 100%)
+}
+.arrow {
+     border: solid grey;
+     border-width: 0 2px 2px 0;
+     display: inline-block;
+     padding: 3px;
+}
+.up {
+     transform: rotate(-135deg);
+     -webkit-transform: rotate(-135deg);
+}
+.arrow-up{
+     margin-top: -55px;
+}
+.upvotes{
+     margin-top: -10px;
+     margin-left: -4px;
+}
+.font-arial{
+     font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+.font-size-10{
+     font-size: 10px;
+}
+.app-color{
+     color:  rgb(131,131,131)
+}
+.answerCount{
+     background-color: rgb(244,245,248);
+     color: rgb(131,131,131);
+     border: 2px solid rgb(131,131,131);
+     border-radius: 4px;
+}
+.right-container{
+     background-color: rgb(248,248,249);
+     height: 100%;
+}
+.arrow-icon{
+     margin-top: 25%;
+}
+.font-size-28{
+     font-size: 28px;
+}
+.selected-question{
+     background-color: rgb(242,241,240) !important;
+}
+.line-height-1-6{
+     line-height: 1.6;
+}
+.noOfAnswers{
+     background-color: rgb(228,230,233);
+     border-top: 1px solid rgb(212,215,220) ;
+     border-bottom: 1px solid  rgb(212,215,220);
+}
+.thumbs-icon{
+     font-size: 18px;
+}
+.thums-down-icon{
+     color: red;
+}

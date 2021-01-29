@@ -10,6 +10,7 @@ namespace CorporateQnAModels.Models.CoreModels
         public string Description { get; set; }
         public QuestionStatus Status { get; set; }
         public DateTime PostingTime { get; set; }
+        public int AnswersCount { get; set; }
         public string UserId { get; set; }
         public int CategoryId { get; set; }
     }

@@ -1,5 +1,6 @@
 ﻿using CorporateQnA.Services.QuestionService;
 using CorporateQnAModels.Models.CoreModels;
+using Models.Models.ViewModels;
 using System.Collections.Generic;
 using System.Web.Http;
 
@@ -25,6 +26,18 @@ namespace CorporateQnA.Controllers
         public Question Get(int id)
         {
             return QuestionService.GetQuestion(id);
+        }
+
+        [Route("questionWithUser/{id}")]
+        public QuestionWithUserViewModel GetQuestionWithUser(int id)
+        {
+            return QuestionService.GetQuestionWithUser(id);
+        }
+
+        [Route("questionsByCategoryId/{id}")]
+        public QuestionWithUserViewModel GetQuestionsByCategoryId(int id)
+        {
+            return QuestionService.GetQuestionsByCategoryId(id);
         }
 
         // POST: api/Category

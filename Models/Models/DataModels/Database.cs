@@ -120,6 +120,7 @@ namespace CorporateQnAModels.Models.DataModels
 		public int NoOfLikes { get; set; }
 		public int NoOfDislikes { get; set; }
 		public DateTime PostingTime { get; set; }
+		public bool BestAnswer { get; set; }
 		public int QuestionId { get; set; }
 		public string UserId { get; set; }
 		public bool IsDeleted { get; set; }
@@ -181,10 +182,38 @@ namespace CorporateQnAModels.Models.DataModels
 		public string Description { get; set; }
 		public short Status { get; set; }
 		public DateTime PostingTime { get; set; }
+		public int AnswersCount { get; set; }
 		public string UserId { get; set; }
 		public int CategoryId { get; set; }
 		public bool IsDeleted { get; set; }
 		public DateTime? DateDeleted { get; set; }
+	}
+
+	public class QuestionWithUserViewModel
+	{
+		public int QuestionId { get; set; }
+		public string Title { get; set; }
+		public string Description { get; set; }
+		public string UserFullName { get; set; }
+		public short Status { get; set; }
+		public DateTime PostingTime { get; set; }
+		public int AnswersCount { get; set; }
+		public int CategoryId { get; set; }
+		public string UserId { get; set; }
+
+	}
+
+	public class AnswerWithUserViewModel
+	{
+		public int Id { get; set; }
+		public string Description { get; set; }
+		public string UserFullName { get; set; }
+		public int NoOfLikes { get; set; }
+		public int NoOfDislikes { get; set; }
+		public DateTime PostingTime { get; set; }
+		public bool BestAnswer { get; set; }
+		public int QuestionId { get; set; }
+		public string UserId { get; set; }
 	}
 
 

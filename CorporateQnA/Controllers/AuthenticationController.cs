@@ -15,11 +15,11 @@ namespace CorporateQnA.Controllers
             AuthenticationService = authenticationService;
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("register")]
-        public async Task<String> Register()
+        public async Task<String> Register(RegisterViewModel registerCreds)
         {
-            return await AuthenticationService.Register(new RegisterViewModel());
+            return await AuthenticationService.Register(registerCreds);
         }
 
         [HttpGet]
