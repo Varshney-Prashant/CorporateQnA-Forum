@@ -139,6 +139,7 @@ namespace CorporateQnAModels.Models.DataModels
 		public string FullName { get; set; }
 		public string Designation { get; set; }
 		public string Company { get; set; }
+		public string ImageUrl { get; set; }
 		public int NoOfLikes { get; set; }
 		public int NoOfDislikes { get; set; }
 		public string Email { get; set; }
@@ -195,6 +196,7 @@ namespace CorporateQnAModels.Models.DataModels
 		public string Title { get; set; }
 		public string Description { get; set; }
 		public string UserFullName { get; set; }
+		public string ImageUrl { get; set; }
 		public short Status { get; set; }
 		public DateTime PostingTime { get; set; }
 		public int AnswersCount { get; set; }
@@ -205,15 +207,40 @@ namespace CorporateQnAModels.Models.DataModels
 
 	public class AnswerWithUserViewModel
 	{
-		public int Id { get; set; }
+		public int AnswerId { get; set; }
 		public string Description { get; set; }
 		public string UserFullName { get; set; }
 		public int NoOfLikes { get; set; }
 		public int NoOfDislikes { get; set; }
+		public string ImageUrl { get; set; }
 		public DateTime PostingTime { get; set; }
 		public bool BestAnswer { get; set; }
 		public int QuestionId { get; set; }
 		public string UserId { get; set; }
+	}
+
+	public class CategoryViewModel
+    {
+		public int CategoryId { get; set; }
+		public string CategoryName { get; set; }
+		public string CategoryDescription { get; set; }
+		public int QuestionId { get; set; }
+		public int DayDiff { get; set; }
+	}
+
+	public class UserInfoViewModel
+	{
+		public string Id { get; set; }
+		public string FullName { get; set; }
+		public string ImageUrl { get; set; }
+		public string Designation { get; set; }
+		public string Company { get; set; }
+		public int NoOfLikes { get; set; }
+		public int NoOfDislikes { get; set; }
+		public int QuestionsAsked { get; set; }
+		public int QuestionsAnswered { get; set; }
+		public int QuestionsSolved { get; set; }
+
 	}
 
 

@@ -1,5 +1,6 @@
 ﻿using CorporateQnA.Services.CategoryService;
 using CorporateQnAModels.Models.CoreModels;
+using CorporateQnAModels.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,12 @@ namespace CorporateQnA.Controllers
         public IEnumerable<Category> Get()
         {
             return CategoryService.GetCategories();
+        }
+
+        [Route("activities")]
+        public IEnumerable<CategoryViewModel> GetCategoryActivities()
+        {
+            return CategoryService.GetCategoryActivities();
         }
 
         // GET: api/Category/5

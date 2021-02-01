@@ -13,6 +13,7 @@ namespace Models.Models.ViewModels
         public string Title { get; set; }       
         public string Description { get; set; }
         public string UserFullName { get; set; }
+        public string ImageUrl { get; set; }
         public QuestionStatus Status { get; set; }
         public DateTime PostingTime { get; set; }
         public int AnswersCount { get; set; }

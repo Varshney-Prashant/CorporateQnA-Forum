@@ -7,5 +7,6 @@
         public string Password { get; set; }
         public string Designation { get; set; }
         public string Company { get; set; }
+        public string ImageUrl { get; set; }
     }
 }

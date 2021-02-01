@@ -16,7 +16,7 @@ namespace CorporateQnA.Controllers
         }
 
         [Route("all")]
-        public IEnumerable<Question> Get()
+        public IEnumerable<Models.Models.ViewModels.QuestionWithUserViewModel> Get()
         {
             return QuestionService.GetQuestions();
         }

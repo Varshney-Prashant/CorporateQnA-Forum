@@ -10,7 +10,7 @@ namespace CorporateQnA.Services.QuestionService
 {
     public interface IQuestionService
     {
-        IEnumerable<Question> GetQuestions();
+        IEnumerable<Models.Models.ViewModels.QuestionWithUserViewModel> GetQuestions();
         Question GetQuestion(int id);
         QuestionWithUserViewModel GetQuestionWithUser(int id);
         QuestionWithUserViewModel GetQuestionsByCategoryId(int id);

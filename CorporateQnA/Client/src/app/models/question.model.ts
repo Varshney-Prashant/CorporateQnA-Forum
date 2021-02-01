@@ -1,8 +1,10 @@
+import { QuestionStatus } from "./enums/question.status.enum";
+
 export class Question {
      id: number;
      title: string;
      description: string;
-     status: string;
+     status: QuestionStatus;
      postingTime: Date;
      userId: string;
      categoryId: number;

@@ -1,13 +1,17 @@
+import { QuestionStatus } from "./enums/question.status.enum";
+
 export class QuestionWithUser {
      questionId: number;
      title: string;
      description: string;
-     status: string;
+     status: QuestionStatus;
      postingTime: Date;
      answersCount: number;
      userFullName: string;
-     categoryId: string;
+     categoryId: number;
      userId: string;
+     imageUrl:string;
+     questionTime:string;
 
      constructor(args: any) {
           this.questionId = args.id;
@@ -19,5 +23,7 @@ export class QuestionWithUser {
           this.userId = args.userId;
           this.categoryId = args.categoryId;
           this.userFullName = args.userFullName;
+          this.imageUrl=args.imageUrl;
+          this.questionTime=args.questionTime;
      }
 }

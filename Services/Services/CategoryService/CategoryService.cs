@@ -19,6 +19,14 @@ namespace CorporateQnA.Services.CategoryService
             return categories.MapCollectionTo<CorporateQnAModels.Models.DataModels.Category,CorporateQnAModels.Models.CoreModels.Category>();
         }
 
+        public IEnumerable<CorporateQnAModels.Models.ViewModels.CategoryViewModel> GetCategoryActivities()
+        {
+            List<CorporateQnAModels.Models.DataModels.CategoryViewModel> categories = 
+                db.Fetch<CorporateQnAModels.Models.DataModels.CategoryViewModel>
+                ("SELECT * FROM CategoryView");
+            return categories.MapCollectionTo<CorporateQnAModels.Models.DataModels.CategoryViewModel, CorporateQnAModels.Models.ViewModels.CategoryViewModel>();
+        }
+
         public CorporateQnAModels.Models.CoreModels.Category GetCategory(int id)
         {
             CorporateQnAModels.Models.DataModels.Category category = db.SingleOrDefault<CorporateQnAModels.Models.DataModels.Category>(

@@ -1,0 +1,31 @@
+<form [formGroup]="form">
+  <div class="pt-3 pr-3">
+    <label for="email" class="font-weight-bold text-white font-Roboto">Email</label>
+    <input 
+      type="text" 
+      class="d-block pr-3 form-control form-input"   
+       formControlName="email"  
+      email 
+     [pattern]="emailPattern"
+    >
+    <div class="text-danger pt-1" *ngIf="!(form.get('email') !).valid  && (form.get('email') !).touched ">
+      <div *ngIf="((form.get('email') !).errors !).required">*Email is Required</div>
+      <div *ngIf="((form.get('email') !).errors !).pattern">* Valid Email is Required</div>
+    </div>
+  </div>
+  <div class="pt-3 pr-3">
+    <label for="password" class="font-weight-bold text-white font-Roboto">Password</label>
+    <input 
+      type="password" 
+      class="d-block pr-3 form-control form-input"   
+       formControlName="password"  
+    >
+    <div class="text-danger pt-1" *ngIf="!(form.get('password') !).valid  && (form.get('password') !).touched ">
+      <div *ngIf="((form.get('password') !).errors !).required">*Password is Required</div>
+    </div>
+  </div>
+  <div class="pt-3 pr-3">
+    <button class="btn btn-primary  px-4 text-white mr-3 mt-3 mb-4"type="button"  [disabled]="!form.valid" (click)="onSubmit()">LogIn</button>
+  </div>
+  
+</form>

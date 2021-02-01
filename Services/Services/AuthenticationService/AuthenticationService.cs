@@ -34,6 +34,10 @@ namespace CorporateQnA.Services.AuthenticationService
 
         public async Task<String> Register(RegisterViewModel registerCreds)
         {
+            if(registerCreds.ImageUrl=="")
+            {
+                registerCreds.ImageUrl = "https://www.shareicon.net/data/512x512/2017/01/06/868320_people_512x512.png";
+            }
             var user = new ApplicationUser
             {
                 UserName = registerCreds.EmailId,
@@ -42,7 +46,8 @@ namespace CorporateQnA.Services.AuthenticationService
                 Designation = registerCreds.Designation,
                 Company = registerCreds.Company,
                 NoOfLikes = 0,
-                NoOfDislikes = 0
+                NoOfDislikes = 0,
+                ImageUrl=registerCreds.ImageUrl
             };
             /*registerCreds.Password = "Prashant@29ap";*/
             /*            registerCreds.Role = "Customer";*/
@@ -65,8 +70,8 @@ namespace CorporateQnA.Services.AuthenticationService
 
         public async Task<Object> Login(LoginViewModel loginCreds)
         {
-            loginCreds.EmailId = "TestUser@test.com";
-            loginCreds.Password = "Prashant@29ap";
+/*            loginCreds.EmailId = "TestUser@test.com";
+            loginCreds.Password = "Prashant@29ap";*/
             var user = await UserManager.FindByEmailAsync(loginCreds.EmailId);
 
             TokenViewModel Token = new TokenViewModel { Name = user.FullName, UserId = user.Id };

@@ -1,6 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Answer } from '../models/answer.model';
 import { AnswerWithUser } from '../models/answerWithUser.model';
 import { Question } from '../models/question.model';
 import { QuestionWithUser } from '../models/questionWithUser.model';
@@ -15,6 +16,11 @@ export class AnswerService {
   private apiAnswerUrl="https://localhost:44360/api/answer";
   constructor(private httpClient:HttpClient) { }
 
+  httpOptions = {
+		headers: new HttpHeaders({
+			'Content-Type': 'application/json'
+		})
+	}
   getQuestionWithUser(id:number):Observable<QuestionWithUser>{
     return this.httpClient.get<QuestionWithUser>(this.apiUrl+'/questionWithUser/'+id);
   }
@@ -23,7 +29,12 @@ export class AnswerService {
   }
 
   getAnswersWithUser(id:number):Observable<AnswerWithUser[]>{
+    console.log(id)
     return this.httpClient.get<AnswerWithUser[]>(this.apiAnswerUrl+'/answerWithUser/'+id);
 
+  }
+
+  updateAnswer(answer:Answer):Observable<void>{
+    return this.httpClient.put<void>(this.apiAnswerUrl+'/update/'+answer.id,answer,this.httpOptions);
   }
 }

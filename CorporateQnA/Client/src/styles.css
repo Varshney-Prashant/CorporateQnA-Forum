@@ -14,26 +14,16 @@
 .top-menu{
      padding: 10px 10px 14px 10px;
 }
-.left-nav{
-     background-color: rgb(62,66,73);
-     width: 100px;
-     bottom: 0;
-     position: relative;
-     top: 0;
-     height:100%;
-}
 .font-size-14{
      font-size: 14px;
 }
 .font-size-12{
      font-size: 12px;
 }
-.forum-icon{
-     padding: 15px 0px 0px 20px;
+.app-container{
+     padding-left: 100px !important;
+    padding-top: 50px !important;
 }
-/* .app-container{
-     margin-left: 100px;
-} */
 .top-nav{
      height: 44px;
      background-color: #fff;
@@ -79,11 +69,11 @@ a:hover{
     opacity: 1;
     left: 40%;
 }
-.home-options{
+.filter-options{
      background-color: rgb(248,248,249);
      border-bottom: 2px solid rgb(212,215,220);
 }
-.home-options-heading{
+.filter-options-heading{
      font-size: small;
      font-weight: 500;
      color: rgb(93,93,94);
@@ -93,19 +83,19 @@ a:hover{
      width: 300px;
 }
 
-#category{
-     width: 250px;
+select{
+     width: 250px !important;
 }
-
-.reset-icon{
-     padding-top: 35px;
+.purple-color{
+     background-color:  rgb(118,97,139);
 }
-
-.add-question{
+.add{
      background-color:  rgb(118,97,139);
      border: 0;
-     margin-top: 30px;
-     
+     margin-top: 30px; 
+}
+.add:hover{
+     background-color:  rgb(118,97,139);
 }
 
 .home-main-container{
@@ -155,8 +145,10 @@ a:hover{
      transform: rotate(-135deg);
      -webkit-transform: rotate(-135deg);
 }
+
 .arrow-up{
-     margin-top: -55px;
+
+     margin-top: 15px;
 }
 .upvotes{
      margin-top: -10px;
@@ -203,4 +195,148 @@ a:hover{
 }
 .thums-down-icon{
      color: red;
+}
+.NgxEditor__Wrapper{
+     border: 2px solid  rgb(212,215,220) !important;
+     font-size: 13px;
+     border-radius: 6px;
+     padding-bottom: 10px;
+     background-color: white !important;
+}
+.NgxEditor{
+     height: 100px !important;
+     overflow-y: scroll;
+}
+.NgxEditor__Wrapper .NgxEditor__MenuBar{
+     border-bottom: 0 !important;
+}
+.NgxEditor__MenuBar{
+     background-color: white;
+}
+
+.top-bar {
+     background-color: purple;
+}
+
+.side-bar {
+     color: #ffffff;
+     margin: 0;
+     padding: 0;
+     padding-top: 50px !important;
+     height: 100%;
+     display: block;
+     background-color: #565357;
+}
+.side-bar li {
+     width: 100px;
+     padding: 15px 15px;
+     text-align: center;
+}
+.side-bar li:hover {
+     cursor: pointer;
+     background-color: #8e8b8f;
+   }
+
+   .add-heading{
+        background-color: rgb(81,89,104);
+   }
+
+   .grey-color{
+        background-color: rgb(164,170,178);
+   }
+
+   .cursor-ptr{
+        cursor: pointer;
+   }
+/* .container-right{
+     height: 100%;
+     border-collapse: collapse;
+     display: table;
+   } */
+/* .editor{
+     display: table-row;
+     vertical-align: bottom;
+     height: 1px;
+} */
+
+.checkbox-container input{
+     display: none;
+   }
+   .checkbox-container{
+     display: inline-block;
+     position: relative;
+   
+   }
+   .checkmark{
+     display: inline-block;
+     height: 16px;
+     width: 16px;
+     position: absolute;
+     /* top: 1;
+     left: 0; */
+     border: 1px solid black;
+     margin-bottom: 10px !important;
+     background-color: white;
+     cursor: pointer;
+   }
+   .checkbox-container input:checked + .checkmark{
+   background-color:rgb(134,192,106);
+   
+   }
+   .checkbox-container input:checked + .checkmark:after{
+     content: "";
+     position: absolute;
+     height: 6px;
+     width: 9px;
+     border-left: 2px solid white;
+     border-bottom: 2px solid white;
+     top: 45%;
+     left: 50%;
+     transform: translate(-50%,-50%) rotate(-60deg);
+     }
+
+
+.tab-header{
+text-align: center;
+}
+
+.tab-header h2.active {
+color: #fff;
+border-bottom: 4px solid #fff;
+}
+
+.tab-header h2 {
+text-align: center;
+font-size: 18px;
+font-weight: 600;
+display:inline-block;
+padding: 30px 40px 10px 40px;
+cursor: pointer;
+color: #545d6a;
+border-bottom: 2px solid #545d6a;
+}
+
+.tab-header h2:focus {
+     outline: none;
+}
+.wrapper {
+display: flex;
+align-items: center;
+flex-direction: column; 
+justify-content: center;
+width: 100%;
+padding: 20px;
+}
+
+.wrapped-div {
+-webkit-border-radius: 10px 10px 10px 10px;
+border-radius: 10px 10px 10px 10px;
+background: #2e3137;
+padding: 30px;
+width: 90%;
+max-width: 450px;
+position: relative;
+padding: 0px;
+-webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
 }

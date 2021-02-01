@@ -22,11 +22,11 @@ namespace CorporateQnA.Controllers
             return await AuthenticationService.Register(registerCreds);
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("login")]
-        public async Task<Object> Login()
+        public async Task<Object> Login(LoginViewModel loginCreds)
         {
-            var x= await AuthenticationService.Login(new LoginViewModel());
+            var x= await AuthenticationService.Login(loginCreds);
             return x;
         }
     }

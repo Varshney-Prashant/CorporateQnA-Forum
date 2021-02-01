@@ -8,6 +8,7 @@ Questions.Status AS Status,
 Questions.PostingTime AS PostingTime,
 Questions.AnswersCount AS AnswersCount,
 AspNetUsers.FullName As UserFullName,
+AspNetUsers.ImageUrl AS ImageUrl,
 Questions.CategoryId AS CategoryId,
 Questions.UserId As UserId
 FROM Questions

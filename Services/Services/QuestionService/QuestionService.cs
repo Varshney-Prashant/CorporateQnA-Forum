@@ -13,10 +13,10 @@ namespace CorporateQnA.Services.QuestionService
             db = new PetaPoco.Database(ConfigurationManager.ConnectionStrings["CorporateQNA"].ConnectionString, "System.Data.SqlClient");
         }
 
-        public IEnumerable<CorporateQnAModels.Models.CoreModels.Question> GetQuestions()
+        public IEnumerable<Models.Models.ViewModels.QuestionWithUserViewModel> GetQuestions()
         {
-            List<CorporateQnAModels.Models.DataModels.Question> questions = db.Fetch<CorporateQnAModels.Models.DataModels.Question>("SELECT * FROM Questions WHERE IsDeleted=0");
-            var x= questions.MapCollectionTo<CorporateQnAModels.Models.DataModels.Question, CorporateQnAModels.Models.CoreModels.Question>();
+            List<CorporateQnAModels.Models.DataModels.QuestionWithUserViewModel> questions = db.Fetch<CorporateQnAModels.Models.DataModels.QuestionWithUserViewModel>("SELECT * FROM QuestionWithUserView ");
+            var x= questions.MapCollectionTo<CorporateQnAModels.Models.DataModels.QuestionWithUserViewModel, Models.Models.ViewModels.QuestionWithUserViewModel>();
             return x;
         }
 
@@ -40,7 +40,7 @@ namespace CorporateQnA.Services.QuestionService
         public Models.Models.ViewModels.QuestionWithUserViewModel GetQuestionsByCategoryId(int id)
         {
             return db.SingleOrDefault<CorporateQnAModels.Models.DataModels.QuestionWithUserViewModel>(
-                    @"SELECT * FROM QuestionWithUserView WHERE QuestionId=@id",
+                    @"SELECT * FROM QuestionWithUserView WHERE CategoryId=@id",
                     new { id }
                     ).MapTo<Models.Models.ViewModels.QuestionWithUserViewModel>();
         }

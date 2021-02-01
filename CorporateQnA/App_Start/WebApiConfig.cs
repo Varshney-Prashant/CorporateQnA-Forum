@@ -20,7 +20,7 @@ namespace CorporateQnA
 
             config.Formatters.JsonFormatter.SerializerSettings.ContractResolver =
             new DefaultContractResolver { NamingStrategy = new CamelCaseNamingStrategy() };
-            config.Formatters.JsonFormatter.SerializerSettings.Converters.Add(new StringEnumConverter());
+            /*config.Formatters.JsonFormatter.SerializerSettings.Converters.Add(new StringEnumConverter());*/
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",

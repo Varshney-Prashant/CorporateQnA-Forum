@@ -3,6 +3,7 @@
     [FullName]             NVARCHAR (MAX) NULL,
     [Designation]          NVARCHAR (MAX) NULL,
     [Company]              NVARCHAR (MAX) NULL,
+    [ImageUrl]             NVARCHAR(MAX)  NOT NULL, 
     [NoOfLikes]            INT            NOT NULL,
     [NoOfDislikes]         INT            NOT NULL,
     [Email]                NVARCHAR (256) NULL,

@@ -7,6 +7,9 @@ export class AnswerWithUser {
      postingTime: Date;
      questionId: number;
      userId: string;
+     imageUrl:string;
+     bestAnswer:boolean;
+     answerTime:string;
 
      constructor(args: any) {
           this.answerId = args.answerId;
@@ -17,5 +20,8 @@ export class AnswerWithUser {
           this.postingTime = args.postingTime;
           this.questionId = args.questionId;
           this.userId = args.userId;
+          this.imageUrl=args.imageUrl;
+          this.bestAnswer=args.bestAnswer;
+          this.answerTime=args.answerTime;
      }
 }

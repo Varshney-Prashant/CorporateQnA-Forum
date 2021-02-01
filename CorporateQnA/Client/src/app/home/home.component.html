@@ -1,20 +1,21 @@
 <div class="container-fluid mx-0 px-0 py-0 my-0">
-     <div class="home-options">
-          <div class="d-sm-flex pt-2 pl-4 pb-0 justify-content-between">
+     <app-filters (filteredQuestions)="getFilteredQuestions($event)" (searchFilter)="filterBySearch($event)"></app-filters>
+     <!-- <div class="home-options">
+          <div class="d-flex pt-2 pl-4 pb-0 justify-content-between">
                <div class="form-group mr-3">
                     <label for="keywords" class="home-options-heading">Keywords</label>
                     <input type="text" name="search" [(ngModel)]="searchText.title" class="form-control keyword-search" placeholder="&#xF002; Search" >
                </div>
                <div class="form-group category-dropdown mr-3">
                     <label for="keywords" class="home-options-heading">Category</label>
-                    <select class="form-control" id=category [(ngModel)]="categoryId" (change)="categorySelected()">
+                    <select class="form-control" id=category [(ngModel)]="categoryId" (change)="filterQuestions()">
                          <option value=0 selected>ALL</option>
                          <option *ngFor="let category of categories" value="{{category.id}}">{{category.name}}</option>
                     </select>
                </div>
                <div class="form-group category-dropdown mr-3">
                     <label for="keywords" class="home-options-heading">Show</label>
-                    <select class="form-control" id=show [(ngModel)]="showFilter" (change)="showFilterSelected()">
+                    <select class="form-control" id=show [(ngModel)]="showFilter" (change)="filterQuestions()">
                          <option value="all">ALL</option>
                          <option value="myQuestions">My Questions</option>
                          <option value="myParticipation">My Participation</option>
@@ -25,49 +26,49 @@
                </div>
                <div class="form-group category-dropdown mr-3">
                     <label for="keywords" class="home-options-heading">Sort By</label>
-                    <select class="form-control" id=sort [(ngModel)]="sortByFilter" (change)="sortBySelected()">
+                    <select class="form-control" id=sort [(ngModel)]="sortByFilter" (change)="filterQuestions()">
                          <option value="all">ALL</option>
                          <option value="recent">Recent</option>
                          <option value="last10Days">Last 10 Days</option>
                          <option value="last30Days">Last 30 Days</option>
                     </select>
                </div>
-               <div class="reset-icon ml-3 mr-3" (click)="resetFilters()">
-                    <i class="fas fa-undo"> Reset</i>
+               <div class="reset-icon ml-3 mr-3 pt-4 mt-2" (click)="resetFilters()">
+                    <fa-icon [icon]="icons.reload" class="pr-1"></fa-icon>
+                    <span>Reset</span>
                </div>
                <div class="mr-3">
-                    <button class="add-question btn btn-primary">+Question</button>
+                    <button class="add-question btn btn-primary" (click)="openModal(modal) ">+Question</button>
                </div>
           </div>
-     </div>
+     </div> -->
      <div class="home-main-container">
           <div class="m-3 home-main d-sm-flex">
                <div class="col-sm-6 px-0 home-left-container">
                     <div class="question-container" *ngFor="let question of questions | filterBy:searchText"  (click)="selected(question)" [ngClass]="{'active-question': selectedQuestion == question}">
-                         <div class="d-sm-flex pt-3 pl-2 pr-3">
-                              <img src="img_avatar.png" class="avatar-image ml-3">
-                              <div class="ml-3 pl-2 question-title">{{question.title}}?</div>
+                         <div class="d-flex pt-3 pl-1 pr-3">
+                              <img src="{{question.imageUrl}}" class="avatar-image ml-3 rounded-circle" width="30px" height="30px">
+                              <div class="ml-1 pl-3 question-title">{{question.title}}? </div>
                          </div>
-                         <div class="font-size-12 question-description ml-5 pl-3 pr-3 mb-3 app-color font-arial">
-                              {{question.description}}
-                         </div>
-                         <div class="d-sm-flex">
-                              <div class="arrow-up ml-3 pl-2">
+                         <div class="d-flex">
+                              <div class="arrow-up ml-3 pl-3">
                                    <i class="arrow up"></i>
                                    <div class="upvotes">33</div>
                               </div>
+                              <div class="font-size-12 question-description ml-2 pl-3 pr-3 mb-3 app-color font-arial">
+                                   {{question.description}}
+                              </div>                            
                          </div>
-                         <div class="d-sm-flex justify-content-between  ml-5 pl-3 pr-3 mb-3">
-                              <div class="d-sm-flex">
+                         <div class="d-flex justify-content-between  ml-5 pl-4 pr-3 mb-3">
+                              <div class="d-flex">
                                    <i class="fa fa-eye mr-3" aria-hidden="true"> <span class="font-size-12 ml-1 font-arial app-color">Views</span></i>
                                    <div class="answerCount font-size-12 px-1">
                                         {{question.answersCount}} Answers
                                    </div>
                               </div>
-                              <div class="pr-3">
-                                   {{question.postingTime}}}
+                              <div class="pr-3 font-size-12 app-color font-weight-500">
+                                   {{question.questionTime}}
                               </div>
-
                          </div>
                     </div>
                </div>
@@ -86,4 +87,47 @@
                </div>               
           </div>
      </div>
+     <!-- <ng-template #modal>
+          <div>
+            <div class="d-flex modal-header add-question-heading text-white">
+              <div>
+                Add Question
+              </div>
+              <button type="button" class="close ml-auto pr-2" aria-label="Close">
+                <span aria-hidden="true" class="text-white" (click)="closeModal()">&times;</span>
+              </button>
+            </div>
+            <form [formGroup]="addQuestionForm">
+              <div class="modal-body row">
+                    <div class="form-group col-sm-9">
+                         <label>Question</label>
+                         <input type="text" class="form-control" placeholder="Enter Your Question" style="font-size: 13px;" formControlName="question">
+                    </div>
+                    <div class="form-group col-sm-9">
+                         <label>Description</label>
+                         <div class="NgxEditor__Wrapper mb-3">
+                              <ngx-editor [editor]="editor" editable="true" [placeholder]="html" formControlName="description">                                
+                                   </ngx-editor>        
+                              <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"> </ngx-editor-menu>                                 
+                         </div>
+                    </div>
+                    <div class="form-group col-sm-9">
+                         <label for="keywords" class="home-options-heading">Category</label>
+                         <select class="form-control col-sm-9" id=category  formControlName="Id">
+                              <option [ngValue]=0 selected>ALL</option>
+                              <option *ngFor="let category of categories" [ngValue]="category.id">{{category.name}}</option>
+                         </select>
+                    </div>
+                    <div class="ml-auto pt-5 mt-3 mr-3">
+                         <button type="button" class="btn px-3 grey-color text-white" (click)="closeModal()">Cancel</button>
+                         <button class="btn px-3 ml-2 purple-color text-white" (click)="addQuestion()">Post</button>
+                    </div>               
+              </div>
+            </form>
+          </div>
+     </ng-template> -->
 </div>
+
+
+
+

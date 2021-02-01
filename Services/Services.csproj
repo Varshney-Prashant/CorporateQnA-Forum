@@ -122,6 +122,8 @@
     <Compile Include="Services\CategoryService\ICategoryService.cs" />
     <Compile Include="Services\QuestionService\IQuestionService.cs" />
     <Compile Include="Services\QuestionService\QuestionService.cs" />
+    <Compile Include="Services\UserServices\IUserService.cs" />
+    <Compile Include="Services\UserServices\UserService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">

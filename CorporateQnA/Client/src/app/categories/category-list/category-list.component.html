@@ -1,0 +1,5 @@
+<app-category-filters (searchFilter)="filterBySearch($event)"></app-category-filters>
+ <div class="d-flex flex-wrap pt-2" style="max-width: 1050px;">
+    <app-category-card *ngFor="let category of categories | filterBy:searchText" class="col-sm-4"
+     [category]="category" ></app-category-card>
+ </div>
