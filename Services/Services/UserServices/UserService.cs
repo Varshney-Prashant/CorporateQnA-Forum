@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MappingExtensions;
 
-namespace Services.Services.UserServices
+namespace CorporateQnAServices.Services.UserServices
 {
     public class UserService:IUserService
     {
@@ -23,6 +23,21 @@ namespace Services.Services.UserServices
             return db.Fetch<DataModels.UserInfoViewModel>("SELECT * FROM UserInfoView")
                 .MapCollectionTo<DataModels.UserInfoViewModel, ViewModels.UserInfoViewModel>();
                 ;
+        }
+
+        public ViewModels.UserInfoViewModel GetUser(string id)
+        {
+            return db.SingleOrDefault<DataModels.UserInfoViewModel>(@"SELECT * FROM UserInfoView WHERE Id=@id", new { id }).MapTo<ViewModels.UserInfoViewModel>();
+        }
+
+        public void Like(string id)
+        {
+            db.Execute(@"UPDATE AspNetUsers SET NoOfLikes=NoOfLikes+1 WHERE Id=@id", new { id });
+        }
+
+        public void Dislike(string id)
+        {
+            db.Execute(@"UPDATE AspNetUsers SET NoOfDislikes=NoOfDislikes+1 WHERE Id=@id", new { id });
         }
     }
 }

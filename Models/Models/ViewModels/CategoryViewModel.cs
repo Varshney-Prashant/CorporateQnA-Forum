@@ -11,7 +11,9 @@ namespace CorporateQnAModels.Models.ViewModels
 		public int CategoryId { get; set; }
 		public string CategoryName { get; set; }
 		public string CategoryDescription { get; set; }
-		public int QuestionId { get; set; }
-		public int DayDiff { get; set; }
+		public int TotalTags { get; set; }
+		public int WeekTags { get; set; }
+		public int MonthTags { get; set; }
+		
 	}
 }

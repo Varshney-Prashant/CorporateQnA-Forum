@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-top-nav-bar',
@@ -8,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TopNavBarComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(private router:Router) { }
+  onUserPage:boolean=false;
   ngOnInit(): void {
+  }
+
+  ngDoCheck(){
+    this.onUserPage=this.router.url.indexOf('user-details') == -1;
   }
 
 }

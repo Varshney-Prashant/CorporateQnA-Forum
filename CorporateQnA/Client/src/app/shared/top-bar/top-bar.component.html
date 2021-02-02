@@ -4,7 +4,17 @@
           <div class="d-flex">
                <div class="top-menu">{{currentDate | date: 'd MMM yyyy'}}</div>
                <fa-icon [icon]="icons.sun" class="top-menu"></fa-icon>
-               <div class="top-menu"></div>
+               <div class="top-menu">
+                    <div class="d-flex">
+                         <div>
+                              {{user.fullName}}
+                         </div>
+                         <div>
+                              <img src="{{user.imageUrl}}" class=" user-image ml-3 rounded-circle" width="40px" height="40px">
+                         </div>
+                    </div>
+               </div>
+               <div class="btn text-white  top-menu" (click)="logOut()">LogOut</div>
           </div>
      </div>
 </div>

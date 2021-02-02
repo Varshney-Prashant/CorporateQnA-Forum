@@ -1,34 +1,39 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Question } from '../models/question.model';
-import { QuestionWithUser } from '../models/questionWithUser.model';
+
+import { Question,QuestionActivity,QuestionWithUser } from '../models';
+
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 export class QuestionService {
 
-  questions:QuestionWithUser[]=[];
-  private apiUrl ="https://localhost:44360/api/question";
-  constructor(private httpClient:HttpClient) { }
+	questions: QuestionWithUser[] = [];
+	private apiUrl = "api/question";
+	constructor(private httpClient: HttpClient) { }
 
-  httpOptions = {
+	httpOptions = {
 		headers: new HttpHeaders({
 			'Content-Type': 'application/json'
 		})
 	}
-  getQuestions():Observable<QuestionWithUser[]>{
-    var res = this.httpClient.get<QuestionWithUser[]>(this.apiUrl + '/all');
-    console.log(res);
-	return res;
-  }
+	getQuestions(): Observable<QuestionWithUser[]> {
+		var res = this.httpClient.get<QuestionWithUser[]>(this.apiUrl + '/all');
+		console.log(res);
+		return res;
+	}
 
-  getQuestionsByCategory(id:number):Observable<Question[]>{
-    return this.httpClient.get<Question[]>(this.apiUrl+'/questionsByCategoryId/'+id);
-  }
+	getQuestionsByCategory(id: number): Observable<Question[]> {
+		return this.httpClient.get<Question[]>(this.apiUrl + '/questionsByCategoryId/' + id);
+	}
 
-  addQuestion(question:Question):Observable<number>{
-    return this.httpClient.post<number>(this.apiUrl+'/add',question,this.httpOptions);
-  }
+	addQuestion(question: Question): Observable<number> {
+		return this.httpClient.post<number>(this.apiUrl + '/add', question, this.httpOptions);
+	}
+
+	updateActivity(questionActivity:QuestionActivity):Observable<any>{
+		return this.httpClient.put<any>(this.apiUrl+'/updateActivity/'+questionActivity.id,questionActivity,this.httpOptions);
+	}
 }

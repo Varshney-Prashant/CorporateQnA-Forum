@@ -1,5 +1,5 @@
 ﻿using CorporateQnAModels.Models.ViewModels;
-using Services.Services.UserServices;
+using CorporateQnAServices.Services.UserServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +21,26 @@ namespace CorporateQnA.Controllers
         public IEnumerable<UserInfoViewModel> GetUsers()
         {
             return UserService.GetUsers();
+        }
+
+        [Route("{id}")]
+        public UserInfoViewModel GetUser(string id)
+        {
+            return UserService.GetUser(id);
+        }
+
+        [Route("like/{id}")]
+        [HttpGet]
+        public void Like(string id)
+        {
+            UserService.Like(id);
+        }
+
+        [Route("dislike/{id}")]
+        [HttpGet]
+        public void Dislike(string id)
+        {
+            UserService.Dislike(id);
         }
     }
 }

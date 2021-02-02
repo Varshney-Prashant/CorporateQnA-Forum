@@ -1,11 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { CategoryViewModel } from 'src/app/models/categoryViewModel';
+
+import { CategoryViewModel } from '../../../models';
 
 @Component({
   selector: 'app-category-card',
-  templateUrl: './category-card.component.html',
-  styles: [
-  ]
+  templateUrl: './category-card.component.html'
 })
 export class CategoryCardComponent implements OnInit {
   @Input() category!: CategoryViewModel;

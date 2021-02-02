@@ -12,7 +12,7 @@ export class Answer{
           this.id = args.id;
           this.description = args.description;
           this.noOfLikes = args.noOfLikes;
-          this.noOfDislikes = args.noOfDisLikes;
+          this.noOfDislikes = args.noOfDislikes;
           this.postingTime = args.postingTime;
           this.bestAnswer=args.bestAnswer;
           this.questionId = args.questionId;

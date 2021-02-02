@@ -1,0 +1,30 @@
+<div class="bg-white border m-3 cursor-ptr">
+     <div class="d-flex p-3">
+         <div>
+             <img src="{{user.imageUrl}}" class="rounded-circle mr-3" width="40px">
+         </div>
+         <div>
+             <h6>{{user.fullName}}</h6>
+             <p class="font-size-12  mb-1 app-color">{{user.designation}}</p>
+             <p class="font-size-12  app-color">{{user.company}}</p>
+             <div class="d-flex align-items-center font-size-14">
+               <i class="fa fa-thumbs-up fa-x mr-2 cursor-ptr" aria-hidden="true" style="color:#00cc6a; font-size:x-large" (click)="likeUser()"></i><span class="mr-3">{{user.noOfLikes}}</span>
+               <i class="fa fa-thumbs-down fa-x mr-2 cursor-ptr" aria-hidden="true" style="color:red; font-size:x-large" (click)="dislikeUser()"></i><span>{{user.noOfDislikes}}</span>
+             </div>
+         </div>
+     </div>
+     <div class="d-flex border-top">
+         <div class="d-flex flex-column align-items-center border-right p-3">
+             <div>{{user.questionsAsked}}</div>
+             <div class="font-size-11 text-muted">Questions Asked</div>
+         </div>
+         <div class="d-flex flex-column align-items-center border-right p-3">
+             <div>{{user.questionsAnswered}}</div>
+             <div class="font-size-11 text-muted">Questions Answered</div>
+         </div>
+         <div class="d-flex flex-column align-items-center p-3">
+             <div>{{user.questionsSolved}}</div>
+             <div class="font-size-11 text-muted">Questions Solved</div>
+         </div>
+     </div>
+</div>

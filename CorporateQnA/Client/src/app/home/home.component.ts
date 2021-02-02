@@ -1,17 +1,12 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, DoCheck, OnInit, TemplateRef } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Editor, Toolbar } from 'ngx-editor';
-import { Category } from '../models/category.model';
-import { CategoryViewModel } from '../models/categoryViewModel';
-import { QuestionStatus } from '../models/enums/question.status.enum';
-import { Question } from '../models/question.model';
-import { QuestionWithUser } from '../models/questionWithUser.model';
-import { CategoryService } from '../services/category.service';
-import { DateTimeService } from '../services/date-time.service';
-import { QuestionService } from '../services/question.service';
-import { Icons } from '../shared/icons';
+
+import { Category,Question,QuestionActivity,QuestionWithUser } from '../models';
+import { CategoryService,DateTimeService,QuestionService,UserService } from '../services';
+import { Icons } from '../shared';
 
 @Component({
 	selector: 'app-home',
@@ -19,23 +14,26 @@ import { Icons } from '../shared/icons';
 	styles: [
 	]
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit,DoCheck {
 
 	questions: QuestionWithUser[] = [];
 	currentDate!: Date;
 	selectedQuestion: QuestionWithUser = new QuestionWithUser({});
-	question:Question=new Question({});
+	questionActivity:QuestionActivity=new QuestionActivity({});
+	question: Question = new Question({});
 	questionSelected: boolean = false;
 	allQuestions: QuestionWithUser[] = [];
 	categories: Category[] = [];
 	categoryId: number = 0;
-	searchText: any = { title: '' };
+	searchText: string="";
 	showFilter: string = "all";
 	sortByFilter: string = "all";
 	icons: Icons = new Icons;
 	addQuestionForm!: FormGroup;
 	modalRef!: BsModalRef;
 	addModal!: TemplateRef<any>;
+	currentQuestionId: number = 0;
+	showFilters:boolean=false;
 	config = {
 		backdrop: false,
 		keybodard: true,
@@ -51,7 +49,13 @@ export class HomeComponent implements OnInit {
 	html = 'Enter Your Answer Here';
 
 
-	constructor(private questionService: QuestionService, private router: Router, private categoryService: CategoryService, private modalService: BsModalService, public dateTimeService:DateTimeService) { }
+	constructor(private questionService: QuestionService, 
+		private router: Router, 
+		private categoryService: CategoryService, 
+		private modalService: BsModalService, 
+		public dateTimeService: DateTimeService, 
+		private userService: UserService,
+		private route:ActivatedRoute) { }
 
 	ngOnInit(): void {
 		this.editor = new Editor({
@@ -70,18 +74,28 @@ export class HomeComponent implements OnInit {
 		this.currentDate = new Date();
 		this.questionService.getQuestions().subscribe(
 			res => {
-
 				console.log(res);
-				this.questionService.questions=res;
+				this.questionService.questions = res;
 				this.questions = res;
 				this.allQuestions = res;
-				for(var i=0;i<res.length;i++){
-					console.log(new Date()+" "+this.questions[i].postingTime)
-					this.questions[i].questionTime=this.dateTimeService.dateDiff(new Date(this.questions[i].postingTime), new Date());
+				for (var i = 0; i < res.length; i++) {
+					console.log(new Date() + " " + this.questions[i].postingTime)
+					this.questions[i].questionTime = this.dateTimeService.dateDiff(new Date(this.questions[i].postingTime), new Date());
 				}
-				this.allQuestions=this.questions;
+				this.allQuestions = this.questions;
+				this.route.params.subscribe(
+					(param: Params) => {
+						let userId=param['id'];
+						console.log(userId)
+						if(userId)
+							this.filterByUser(userId);
+		
+					}
+				);
 			}
 		)
+		
+
 		this.categoryService.getCategories().subscribe(
 			res => {
 				this.categories = res;
@@ -89,122 +103,50 @@ export class HomeComponent implements OnInit {
 		)
 	}
 
-	getFilteredQuestions(filteredQuestions:QuestionWithUser[]){
+	ngDoCheck(){
+		this.showFilters = this.router.url.indexOf('user-details') == -1;
+	}
+
+	filterByUser(id:string){
+		this.questions=this.questions.filter(
+			question=>{
+				console.log(id)
+				return question.userId==id;
+			}
+		)
+	}
+	getFilteredQuestions(filteredQuestions: QuestionWithUser[]) {
 		this.questionSelected = false;
 		this.router.navigate(['home'])
-		this.questions=filteredQuestions;
+		this.questions = filteredQuestions;
 	}
 
-	filterBySearch(searchText:string){
+	filterBySearch(searchText: string) {
 		console.log(searchText)
-		this.searchText=searchText;
+		this.searchText = searchText;
 	}
-
-	// addQuestion() {
-	// 	this.question.title=this.addQuestionForm.value.question
-	// 	this.question.description=this.addQuestionForm.value['description']['content'][0]['content'][0]['text'];
-	// 	this.question.status=QuestionStatus.unResolved;
-	// 	this.question.postingTime=new Date;
-	// 	this.question.userId="3a81cc47-40c6-4735-8d48-eaf4885bb546";
-	// 	this.question.categoryId=this.addQuestionForm.value.Id;
-	// 	this.question.answersCount=0;
-	// 	this.questionService.addQuestion(this.question).subscribe(
-	// 		res=>{
-	// 			console.log(res);
-	// 		}
-	// 	)
-		
-	// }
-	// openModal(template: TemplateRef<any>) {
-	// 	console.log(template)
-	// 	this.modalRef = this.modalService.show(template, this.config);
-	// }
-
-	// closeModal() {
-	// 	this.modalRef.hide();
-	// }
 
 	selected(question: QuestionWithUser) {
 		this.selectedQuestion = question;
 		this.questionSelected = true;
-		console.log(question)
-		this.router.navigate(['home/answer', question.questionId])
+		this.currentQuestionId = question.questionId
+		question.viewCount=question.viewCount+1;
+		this.questionActivity.id=question.activityId;
+		this.questionActivity.questionId=question.questionId;
+		this.questionActivity.viewCount=question.viewCount;
+		this.questionActivity.upVotes=question.upVotes;
+
+		this.questionService.updateActivity(this.questionActivity).subscribe();
 	}
 
-	// resetFilters() {
-	// 	this.showFilter = "all";
-	// 	this.sortByFilter = "all";
-	// 	this.searchText = "";
-	// 	this.questions = this.allQuestions;
-	// }
+	upVote(question:QuestionWithUser, event:Event){
+		event.stopPropagation();
 
-	// filterQuestions() {
-	// 	this.questions = this.allQuestions;
-	// 	if (this.categoryId != 0) {
-	// 		const categoryQuestions = [];
-	// 		for (var i = 0; i < this.questions.length; i++) {
-	// 			console.log(this.questions[i].categoryId)
-	// 			if (this.questions[i].categoryId == this.categoryId) {
-	// 				console.log(this.categoryId)
-	// 				categoryQuestions.push(this.questions[i]);
-	// 			}
-	// 		}
-	// 		console.log(categoryQuestions)
-	// 		this.questions = categoryQuestions;
-	// 		console.log(this.questions)
-	// 	}
-	// 	else {
-	// 		this.questions = this.allQuestions;
-	// 	}
-	// 	if (this.showFilter == "myQuestions" || this.showFilter == "myParticipation") {
-	// 		//getQuestions of that user
-	// 	}
-	// 	else if (this.showFilter == "hot") {
-	// 		//get hot questions
-	// 	}
-	// 	else if (this.showFilter == "solved") {
-	// 		const solvedQuestions = [];
-	// 		for (var i = 0; i < this.questions.length; i++) {
-	// 			if (this.questions[i].status === QuestionStatus.resolved) {
-	// 				solvedQuestions.push(this.questions[i]);
-	// 			}
-	// 		}
-	// 		this.questions = solvedQuestions;
-	// 	}
-	// 	else if (this.showFilter == "unsolved") {
-	// 		const unsolvedQuestions = [];
-	// 		for (var i = 0; i < this.questions.length; i++) {
-	// 			if (this.questions[i].status === QuestionStatus.unResolved) {
-	// 				unsolvedQuestions.push(this.questions[i]);
-	// 			}
-	// 		}
-	// 		this.questions = unsolvedQuestions;
-	// 	}
-	// 	if (this.sortByFilter == "recent") {
-	// 		this.questions.sort((a, b) => a.postingTime < b.postingTime ? -1 : a.postingTime > b.postingTime ? 1 : 0)
-	// 	}
-	// 	else if (this.sortByFilter == "last10Days") {
-	// 		const last10DaysQuestions = [];
-	// 		for (var i = 0; i < this.questions.length; i++) {
-	// 			var diff = Math.abs((new Date).getTime() - (new Date(this.questions[i].postingTime)).getTime());
-	// 			var diffDays = Math.ceil(diff / (1000 * 3600 * 24));
-	// 			console.log(diffDays);
-	// 			if (diffDays <= 10) {
-	// 				last10DaysQuestions.push(this.questions[i]);
-	// 			}
-	// 		}
-	// 		this.questions = last10DaysQuestions;
-	// 	}
-	// 	else if (this.sortByFilter == "last30Days") {
-	// 		const last30DaysQuestions = [];
-	// 		for (var i = 0; i < this.questions.length; i++) {
-	// 			var diff = Math.abs((new Date).getTime() - (new Date(this.questions[i].postingTime)).getTime());
-	// 			var diffDays = Math.ceil(diff / (1000 * 3600 * 24));
-	// 			if (diffDays <= 30) {
-	// 				last30DaysQuestions.push(this.questions[i]);
-	// 			}
-	// 		}
-	// 		this.questions = last30DaysQuestions;
-	// 	}
-	// }
+		question.upVotes=question.upVotes+1;
+		this.questionActivity.id=question.activityId;
+		this.questionActivity.questionId=question.questionId;
+		this.questionActivity.viewCount=question.viewCount;
+		this.questionActivity.upVotes=question.upVotes;
+		this.questionService.updateActivity(this.questionActivity).subscribe();
+	}
 }

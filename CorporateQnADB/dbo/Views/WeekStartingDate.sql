@@ -1,0 +1,4 @@
+﻿CREATE VIEW [dbo].[WeekStartingDate]
+AS 
+SELECT 
+DATEADD(Day,2-DATEPART(WEEKDAY,GETDATE()), CAST(GETDATE() AS DATE)) as Date;

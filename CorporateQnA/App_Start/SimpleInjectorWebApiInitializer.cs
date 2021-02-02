@@ -17,6 +17,7 @@ namespace CorporateQnA.App_Start
     using AutoMapper.Configuration;
     using CorporateQnA.Services.QuestionService;
     using CorporateQnA.Services.AnswerService;
+    using CorporateQnAServices.Services.UserServices;
 
     public static class SimpleInjectorWebApiInitializer
     {
@@ -64,6 +65,7 @@ namespace CorporateQnA.App_Start
             container.Register<ICategoryService, CategoryService>(Lifestyle.Scoped);
             container.Register<IQuestionService, QuestionService>(Lifestyle.Scoped);
             container.Register<IAnswerService, AnswerService>(Lifestyle.Scoped);
+            container.Register<IUserService, UserService>(Lifestyle.Scoped);
             /*container.Register<MapperProvider>();*/
             // For instance:
             // container.Register<IUserRepository, SqlUserRepository>(Lifestyle.Scoped);

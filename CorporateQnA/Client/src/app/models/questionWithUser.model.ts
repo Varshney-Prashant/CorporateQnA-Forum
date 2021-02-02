@@ -10,8 +10,11 @@ export class QuestionWithUser {
      userFullName: string;
      categoryId: number;
      userId: string;
-     imageUrl:string;
-     questionTime:string;
+     imageUrl: string;
+     questionTime: string;
+     viewCount: number;
+     upVotes: number;
+     activityId: number;
 
      constructor(args: any) {
           this.questionId = args.id;
@@ -23,7 +26,10 @@ export class QuestionWithUser {
           this.userId = args.userId;
           this.categoryId = args.categoryId;
           this.userFullName = args.userFullName;
-          this.imageUrl=args.imageUrl;
-          this.questionTime=args.questionTime;
+          this.imageUrl = args.imageUrl;
+          this.questionTime = args.questionTime;
+          this.viewCount = args.viewCount;
+          this.upVotes = args.upVotes;
+          this.activityId = args.activityId;
      }
 }

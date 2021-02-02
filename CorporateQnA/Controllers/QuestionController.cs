@@ -40,6 +40,18 @@ namespace CorporateQnA.Controllers
             return QuestionService.GetQuestionsByCategoryId(id);
         }
 
+        [Route("byUserId/{id}")]
+        public IEnumerable<QuestionWithUserViewModel> GetQuestionsByUserId(string id)
+        {
+            return QuestionService.GetQuestionsByUserId(id);
+        }
+
+        [Route("answerCount/{id}")]
+        public int GetAnswerCount(int id)
+        {
+            return QuestionService.GetAnswerCount(id);
+        }
+
         // POST: api/Category
         [Route("add")]
         public int Post(Question question)
@@ -52,6 +64,13 @@ namespace CorporateQnA.Controllers
         public void Put(int id, Question question)
         {
             QuestionService.PutQuestion(id, question);
+        }
+
+        [Route("updateActivity/{id}")]
+        [HttpPut]
+        public void UpdateActivity(int id, QuestionActivity activity)
+        {
+            QuestionService.UpdateActivity(id, activity);
         }
 
         [Route("delete/{id}")]

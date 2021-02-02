@@ -190,6 +190,18 @@ namespace CorporateQnAModels.Models.DataModels
 		public DateTime? DateDeleted { get; set; }
 	}
 
+	[TableName("dbo.QuestionActivities")]
+	[PrimaryKey("Id")]
+	public class QuestionActivity: CorporateQNADB.Record<QuestionActivity>
+	{
+		public int Id { get; set; }
+		public int QuestionId { get; set; }
+		public int ViewCount { get; set; }
+		public int UpVotes { get; set; }
+		public bool IsDeleted { get; set; }
+		public DateTime? DateDeleted { get; set; }
+	}
+
 	public class QuestionWithUserViewModel
 	{
 		public int QuestionId { get; set; }
@@ -198,8 +210,11 @@ namespace CorporateQnAModels.Models.DataModels
 		public string UserFullName { get; set; }
 		public string ImageUrl { get; set; }
 		public short Status { get; set; }
+		public int ViewCount { get; set; }
+		public int UpVotes { get; set; }
 		public DateTime PostingTime { get; set; }
 		public int AnswersCount { get; set; }
+		public int ActivityId { get; set; }
 		public int CategoryId { get; set; }
 		public string UserId { get; set; }
 
@@ -224,8 +239,9 @@ namespace CorporateQnAModels.Models.DataModels
 		public int CategoryId { get; set; }
 		public string CategoryName { get; set; }
 		public string CategoryDescription { get; set; }
-		public int QuestionId { get; set; }
-		public int DayDiff { get; set; }
+		public int TotalTags { get; set; }
+		public int WeekTags { get; set; }
+		public int MonthTags { get; set; }
 	}
 
 	public class UserInfoViewModel
@@ -242,6 +258,7 @@ namespace CorporateQnAModels.Models.DataModels
 		public int QuestionsSolved { get; set; }
 
 	}
+
 
 
 }

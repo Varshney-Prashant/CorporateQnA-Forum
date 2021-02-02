@@ -5,10 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services.Services.UserServices
+namespace CorporateQnAServices.Services.UserServices
 {
     public interface IUserService
     {
         IEnumerable<UserInfoViewModel> GetUsers();
+        UserInfoViewModel GetUser(string id);
+        void Like(string id);
+        void Dislike(string id);
+
     }
 }

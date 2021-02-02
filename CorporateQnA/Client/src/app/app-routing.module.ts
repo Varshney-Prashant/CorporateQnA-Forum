@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+
 import { AuthGuardGuard } from './auth';
-import { CategoryListComponent } from './categories/category-list/category-list.component';
-import { AnswerComponent } from './home/answer/answer.component';
-import { HomeComponent } from './home/home.component';
+import { CategoryListComponent } from './categories';
+import { AnswerComponent, HomeComponent } from './home';
 import { LoginComponent, RegistrationComponent, UserComponent } from './user';
+import { UserDetailsComponent,UserListComponent } from './user-list';
 
 const routes: Routes = [
 	{ path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -16,6 +17,8 @@ const routes: Routes = [
 			{ path: 'register', component: RegistrationComponent }
 		]
 	},
+	{ path:'user',component:UserListComponent },
+	{ path:'user-details/:id',component:UserDetailsComponent },
 	{
 		path: 'home', component: HomeComponent, canActivate: [AuthGuardGuard],
 		children: [

@@ -123,6 +123,7 @@
     <Compile Include="Models\CoreModels\Answer.cs" />
     <Compile Include="Models\CoreModels\Category.cs" />
     <Compile Include="Models\CoreModels\Question.cs" />
+    <Compile Include="Models\CoreModels\QuestionActivity.cs" />
     <Compile Include="Models\Enums\QuestionStatus.cs" />
     <Compile Include="Models\DataModels\Database.cs">
       <AutoGen>True</AutoGen>

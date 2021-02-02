@@ -14,8 +14,11 @@ namespace CorporateQnA.Services.QuestionService
         Question GetQuestion(int id);
         QuestionWithUserViewModel GetQuestionWithUser(int id);
         QuestionWithUserViewModel GetQuestionsByCategoryId(int id);
+        IEnumerable<QuestionWithUserViewModel> GetQuestionsByUserId(string id);
         int PostQuestion(Question question);
+        int GetAnswerCount(int id);
         void PutQuestion(int id, Question question);
+        void UpdateActivity(int id, QuestionActivity activity);
         void DeleteQuestion(int id);
     }
 }

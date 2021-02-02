@@ -30,8 +30,10 @@
                          <div class ="ml-2 app-color font-size-12">{{answer.answerTime}}</div>
                     </div>
                     <div class="mr-4">
-                         <i *ngIf="answer.noOfLikes!=0" class="fa fa-thumbs-up fa-x mr-2 cursor-ptr" aria-hidden="true" style="color:#00cc6a" (click)="like(answer)"></i><span class="mr-3">{{answer.noOfLikes}}</span>
-                         <i *ngIf="answer.noOfLikes!=0" class="fa fa-thumbs-down fa-x mr-2 cursor-ptr" aria-hidden="true" style="color:red" (click)="dislike(answer)"></i><span>{{answer.noOfDislikes}}</span>
+                         <i *ngIf="answer.noOfLikes!=0" class="fa fa-thumbs-up fa-x mr-2 cursor-ptr mr-3" aria-hidden="true" style="color:#00cc6a" (click)="like(answer)"><span class="">{{answer.noOfLikes}}</span></i>
+                         <i *ngIf="answer.noOfLikes==0" class="fa fa-thumbs-up fa-x mr-2 cursor-ptr mr-3" aria-hidden="true"  (click)="like(answer)"><span class="">{{answer.noOfLikes}}</span></i>
+                         <i *ngIf="answer.noOfDislikes!=0" class="fa fa-thumbs-down fa-x mr-2 cursor-ptr" aria-hidden="true" style="color:red" (click)="dislike(answer)"><span>{{answer.noOfDislikes}}</span></i>
+                         <i *ngIf="answer.noOfDislikes==0" class="fa fa-thumbs-down fa-x mr-2 cursor-ptr" aria-hidden="true" (click)="dislike(answer)"><span>{{answer.noOfDislikes}}</span></i>
                     </div>
                </div>
                <div class="pt-2">
@@ -47,43 +49,48 @@
                               <div class="ml-4">
                                    Mark as Best solution
                               </div>
-                    </div>
-                    
-                         
+                    </div>                        
                </div>
           </div>
      </div>
-     <div class="form-group col-12 mt-4 editor">    
-          <div class="NgxEditor__Wrapper mx-3 mb-3">
-               <div class="d-flex justify-content-end">
-                    <fa-icon [icon]="icons.expand" size="2x" class="pl-2 cursor-ptr" style="color:  rgb(131,131,131);" (click)="openModal(modal)"></fa-icon>
-               </div> 
-               <ngx-editor [editor]="editor" editable="true" [placeholder]="html">                                
-               </ngx-editor>        
-               <div class="d-flex">
-                    <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"> </ngx-editor-menu>
-                    <fa-icon [icon]="icons.send" class="ml-auto mr-2" size="2x" style="color:  rgb(131,131,131);"></fa-icon>
-               </div>                                   
-          </div>
+     <div class="form-group col-12 mt-4 editor">   
+          <form [formGroup]="answerForm">
+               <div class="NgxEditor__Wrapper mx-3 mb-3">
+                    <div class="d-flex justify-content-end">
+                         <fa-icon [icon]="icons.expand" size="2x" class="pl-2 cursor-ptr" style="color:  rgb(131,131,131);"></fa-icon>
+                    </div> 
+                    <ngx-editor [editor]="editor" editable="true" [placeholder]="html" formControlName="editorContent">                                
+                    </ngx-editor>        
+                    <div class="d-flex">
+                         <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"> </ngx-editor-menu>
+                         <fa-icon [icon]="icons.send" class="ml-auto mr-2" size="2x" style="color:  rgb(131,131,131);" (click)="submitAnswer()"></fa-icon>
+                    </div>                                   
+               </div>
+          </form> 
      </div>  
-     <ng-template #modal class="expand-modal">
+     <!-- <ng-template #modal class="expand-modal">
           <div class="expand-modal">
                <div class="d-flex modal-header add-question-heading text-white">
                     <div class="d-flex justify-content-end">
                          <fa-icon [icon]="icons.expand" size="2x" class="pl-2 cursor-ptr" style="color:  rgb(131,131,131);" (click)="closeModal()"></fa-icon>
                     </div>
                </div>
-               <div class="modal-body">
-                    <div class="NgxEditor__Wrapper mx-3 mb-3">                    
-                         <ngx-editor [editor]="editor" editable="true" [placeholder]="html">                                
-                         </ngx-editor>        
-                         <div class="d-flex">
-                              <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"> </ngx-editor-menu>
-                              <fa-icon [icon]="icons.send" class="ml-auto mr-2" size="2x" style="color:  rgb(131,131,131);"></fa-icon>
-                         </div>                                   
+               <form [formGroup]="answerForm" (ngSubmit)="submitAnswer()">
+                    <div class="modal-body">  
+                                    
+                         <div class="NgxEditor__Wrapper mx-3 mb-3">                    
+                              <ngx-editor [editor]="editor" editable="true" [placeholder]="html">                                
+                              </ngx-editor>        
+                              <div class="d-flex">
+                                   <ngx-editor-menu [editor]="editor" [toolbar]="toolbar" formControlName="editorContent"> </ngx-editor-menu>
+                                   <button type="submit" class="button ml-auto">
+                                        <fa-icon [icon]="icons.send" class="ml-auto mr-2" size="2x" style="color:  rgb(131,131,131);"></fa-icon>
+                                        </button>
+                              </div>                                   
+                         </div>                   
                     </div>
-               </div>
+               </form>
           </div>
-     </ng-template>
+     </ng-template> -->
 </div>
 

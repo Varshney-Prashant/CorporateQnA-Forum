@@ -1,15 +1,15 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Category } from '../models/category.model';
-import { CategoryViewModel } from '../models/categoryViewModel';
+
+import { Category,CategoryViewModel } from '../models';
 
 @Injectable({
 	providedIn: 'root'
 })
 export class CategoryService {
 
-	private apiUrl = "https://localhost:44360/api/category";
+	private apiUrl = "api/category";
 	constructor(private httpClient: HttpClient) { }
 
 	httpOptions = {
@@ -21,8 +21,8 @@ export class CategoryService {
 		return this.httpClient.get<Category[]>(this.apiUrl + '/all');
 	}
 
-	getCategoryActivities():Observable<any>{
-		return this.httpClient.get<any>(this.apiUrl+'/activities/');
+	getCategoryActivities():Observable<CategoryViewModel[]>{
+		return this.httpClient.get<CategoryViewModel[]>(this.apiUrl+'/activities');
 	}
 
 	addCategory(category:Category):Observable<number>{

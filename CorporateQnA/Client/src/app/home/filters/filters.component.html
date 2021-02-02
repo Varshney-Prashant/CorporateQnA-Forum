@@ -2,7 +2,7 @@
      <div class="d-flex pt-2 pl-4 pb-0 justify-content-between">
           <div class="form-group mr-3">
                <label for="keywords" class="filter-options-heading">Keywords</label>
-               <input type="text" name="search" [(ngModel)]="searchText.title" class="form-control keyword-search" placeholder="&#xF002; Search" (change)="searchTextFilter()">
+               <input type="text" name="search" [(ngModel)]="searchText" class="form-control keyword-search" placeholder="&#xF002; Search" (keydown)="searchTextFilter()">
           </div>
           <div class="form-group category-dropdown mr-3">
                <label for="keywords" class="home-options-heading">Category</label>

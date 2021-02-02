@@ -15,8 +15,11 @@ namespace Models.Models.ViewModels
         public string UserFullName { get; set; }
         public string ImageUrl { get; set; }
         public QuestionStatus Status { get; set; }
+        public int ViewCount { get; set; }
+        public int UpVotes { get; set; }
         public DateTime PostingTime { get; set; }
         public int AnswersCount { get; set; }
+        public int ActivityId { get; set; }
         public int CategoryId { get; set; }
         public string UserId { get; set; }
         

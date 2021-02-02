@@ -1,19 +1,20 @@
 import { Component, EventEmitter, OnInit, Output, TemplateRef } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { Category } from 'src/app/models/category.model';
-import { CategoryService } from 'src/app/services/category.service';
-import { Icons } from 'src/app/shared/icons';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
+
+import { Category } from '../../../models';
+import { CategoryService } from '../../../services';
+import { Icons } from '../../../shared';
 
 @Component({
 	selector: 'app-category-filters',
-	templateUrl: './category-filters.component.html',
-	styles: [
-	]
+	templateUrl: './category-filters.component.html'
 })
 export class CategoryFiltersComponent implements OnInit {
 
-	searchText: any = { name: '' };
+	searchText: string="";
 	showFilter: string = "popular";
 	icons:Icons=new Icons
 	addCategoryForm!: FormGroup;
@@ -26,9 +27,14 @@ export class CategoryFiltersComponent implements OnInit {
 		class: 'modal-lg'
 	};
 	@Output() searchFilter =new EventEmitter<string>();
-	constructor(private modalService: BsModalService, private categoryService:CategoryService) { }
+
+	constructor(private modalService: BsModalService, private categoryService:CategoryService, private toastr:ToastrService) { }
 
 	ngOnInit(): void {
+		this.initializeForm();
+	}
+
+	initializeForm(){
 		this.addCategoryForm = new FormGroup({
 			'name': new FormControl(null, Validators.required)!,
 			'description': new FormControl(null, Validators.required)!
@@ -36,11 +42,13 @@ export class CategoryFiltersComponent implements OnInit {
 	}
 
 	searchTextFilter() {
+		console.log(this.searchText)
 		this.searchFilter.emit(this.searchText)
 	}
 
 	resetFilters(){
 		this.searchText = "";
+		this.searchFilter.emit(this.searchText)
 	}
 	openModal(template: TemplateRef<any>) {
 		console.log(template)
@@ -50,14 +58,15 @@ export class CategoryFiltersComponent implements OnInit {
 	closeModal() {
 		this.modalRef.hide();
 	}
-	filterQuestions(){
-
-	}
 
 	addCategory(){
 		this.category.name=this.addCategoryForm.value.name;
 		this.category.description=this.addCategoryForm.value.description
-		this.categoryService.addCategory(this.category).subscribe();
+		this.categoryService.addCategory(this.category).subscribe(
+			res=>{
+				this.toastr.success("Category Added", "Succesfully");
+			}
+		);
 		this.closeModal();
 	}
 }
