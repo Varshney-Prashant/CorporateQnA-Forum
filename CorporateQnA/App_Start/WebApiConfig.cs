@@ -25,7 +25,6 @@ namespace CorporateQnA
             config.Formatters.JsonFormatter.SerializerSettings.Converters.Add(new IsoDateTimeConverter { DateTimeStyles = DateTimeStyles.AssumeLocal });
             // DateTimeZoneHandling will be effective during deserialization
             config.Formatters.JsonFormatter.SerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Local;
-            /*config.Formatters.JsonFormatter.SerializerSettings.Converters.Add(new StringEnumConverter());*/
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",

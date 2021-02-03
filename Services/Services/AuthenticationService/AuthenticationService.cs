@@ -23,7 +23,6 @@ namespace CorporateQnA.Services.AuthenticationService
         private UserStore<ApplicationUser> Store { get; }
         private UserManager<ApplicationUser> UserManager { get; }
         private readonly AuthenticationContext Context;
-        /*private SignInManager<ApplicationUser> SignInManager { get; }*/
         public AuthenticationService(AuthenticationContext context)
         {
             Context = context;
@@ -49,20 +48,10 @@ namespace CorporateQnA.Services.AuthenticationService
                 NoOfDislikes = 0,
                 ImageUrl=registerCreds.ImageUrl
             };
-            /*registerCreds.Password = "Prashant@29ap";*/
-            /*            registerCreds.Role = "Customer";*/
             var Result = await UserManager.CreateAsync(user, registerCreds.Password);
-
-
-            /*await UserManager.AddToRoleAsync(user, registerCreds.Role);*/
 
             if (Result.Succeeded)
             {
-                /* var result = await SignInManager.PasswordSignInAsync(user, registerCreds.Password, false, false);
-                 if (result.Succeeded)
-                 {
-                     return Ok(result);
-                 }*/
                 return "user Added";
             }
             return Result.Errors.First();
@@ -70,8 +59,6 @@ namespace CorporateQnA.Services.AuthenticationService
 
         public async Task<Object> Login(LoginViewModel loginCreds)
         {
-/*            loginCreds.EmailId = "TestUser@test.com";
-            loginCreds.Password = "Prashant@29ap";*/
             var user = await UserManager.FindByEmailAsync(loginCreds.EmailId);
 
             TokenViewModel Token = new TokenViewModel { Name = user.FullName, UserId = user.Id };
@@ -97,7 +84,6 @@ namespace CorporateQnA.Services.AuthenticationService
             }
             else
             {
-                /*return HttpStatusCode.BadRequest;*/
                 Request = new HttpRequestMessage();
                 HttpResponseMessage response =
                 this.Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Invalid Credentials");

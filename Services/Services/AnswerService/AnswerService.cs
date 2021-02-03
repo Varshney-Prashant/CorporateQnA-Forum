@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using DataModels = CorporateQnAModels.Models.DataModels;
+using CoreModels = CorporateQnAModels.Models.CoreModels;
+using ViewModels = CorporateQnAModels.Models.ViewModels;
 
 namespace CorporateQnA.Services.AnswerService
 {
@@ -15,39 +17,39 @@ namespace CorporateQnA.Services.AnswerService
             db = new PetaPoco.Database(ConfigurationManager.ConnectionStrings["CorporateQNA"].ConnectionString, "System.Data.SqlClient");
         }
 
-        public IEnumerable<CorporateQnAModels.Models.CoreModels.Answer> GetAnswers()
+        public IEnumerable<CoreModels.Answer> GetAnswers()
         {
             List<DataModels.Answer> answers = db.Fetch<DataModels.Answer>("SELECT * FROM Answers WHERE IsDeleted=0");
-            return answers.MapCollectionTo<DataModels.Answer, CorporateQnAModels.Models.CoreModels.Answer>();
+            return answers.MapCollectionTo<DataModels.Answer, CoreModels.Answer>();
         }
 
-        public IEnumerable<CorporateQnAModels.Models.ViewModels.AnswerWithUserViewModel> GetAnswerWithUser(int id)
+        public IEnumerable<ViewModels.AnswerWithUserViewModel> GetAnswerWithUser(int id)
         {
             return db.Fetch<DataModels.AnswerWithUserViewModel>(
                     @"SELECT * FROM AnswerWithUserView WHERE QuestionId=@id ORDER BY NoOfLikes DESC, NoOfDisLikes",
                     new { id }
-                    ).MapCollectionTo<DataModels.AnswerWithUserViewModel, CorporateQnAModels.Models.ViewModels.AnswerWithUserViewModel>();
+                    ).MapCollectionTo<DataModels.AnswerWithUserViewModel, ViewModels.AnswerWithUserViewModel>();
         }
 
-        public CorporateQnAModels.Models.CoreModels.Answer GetAnswer(int id)
+        public CoreModels.Answer GetAnswer(int id)
         {
             DataModels.Answer answer = db.SingleOrDefault<DataModels.Answer>(
                                                                     @"SELECT * FROM Answers WHERE IsDeleted=0 AND Id=@id",
                                                                     new { id });
-            return answer.MapTo<CorporateQnAModels.Models.CoreModels.Answer>();
+            return answer.MapTo<CoreModels.Answer>();
         }
 
-        public int PostAnswer(CorporateQnAModels.Models.CoreModels.Answer answer)
+        public int PostAnswer(CoreModels.Answer answer)
         {
             return Convert.ToInt32(db.Insert(
                 answer.MapTo<DataModels.Answer>())
                 );
         }
 
-        public void PutAnswer(int id, CorporateQnAModels.Models.CoreModels.Answer answer)
+        public void PutAnswer(int id, CoreModels.Answer answer)
         {
             var currentAnswer = db.SingleOrDefault<DataModels.Answer>(id)
-                                  .MapTo<CorporateQnAModels.Models.CoreModels.Answer>();
+                                  .MapTo<CoreModels.Answer>();
             if (currentAnswer != null)
             {
                 db.Update(answer.MapTo<DataModels.Answer>());
@@ -57,7 +59,7 @@ namespace CorporateQnA.Services.AnswerService
         public void DeleteAnswer(int id)
         {
             var answer = db.SingleOrDefault<DataModels.Answer>(id)
-                           .MapTo<CorporateQnAModels.Models.CoreModels.Answer>();
+                           .MapTo<CoreModels.Answer>();
             if (answer != null)
             {
                 db.Execute(@"UPDATE Answers SET IsDeleted=1, DateDeleted=@CurrentDate WHERE Id=@Id", new { Id = id, CurrentDate = DateTime.Now });

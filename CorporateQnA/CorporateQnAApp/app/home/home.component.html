@@ -1,0 +1,59 @@
+<div class="container-fluid mx-0 px-0 py-0 my-0">
+     <app-filters (filteredQuestions)="getFilteredQuestions($event)" (searchFilter)="filterBySearch($event)" *ngIf="showFilters"></app-filters>
+     <div class="main-container">
+          <div class="m-3 home-main d-sm-flex">
+               <div class="col-sm-6 px-0 home-left-container">
+                    <div class="question-container cursor-ptr" *ngFor="let question of questions | search:searchText"  (click)="selected(question)" [ngClass]="{'active-question': selectedQuestion == question}">
+                         <div [ngClass]="{'resolved-question': question.status}"></div>
+                         <div class="d-flex pt-3 pl-1 pr-3">
+                              <img src="{{question.imageUrl}}" class="avatar-image ml-3 rounded-circle" width="30px" height="30px">
+                              <div class="ml-0 pl-3 question-title">{{question.title}}? </div>
+                         </div>
+                         <div class="d-flex">
+                              <div class="arrow-up ml-3 pl-3" (click)="upVote(question, $event)">
+                                   <i class="arrow up"></i>
+                                   <div class="upvotes text-right">{{question.upVotes}}</div>
+                              </div>
+                              <div class="font-size-12 question-description ml-2 pl-3 pr-3 mb-3 app-color font-arial">
+                                   {{question.description}}
+                              </div>                            
+                         </div>
+                         <div class="d-flex justify-content-between  ml-5 pl-3 pr-3 mb-3">
+                              <div class="d-flex">
+                                   <i class="fa fa-eye mr-3" aria-hidden="true"> <span class="font-size-12 ml-1 font-arial app-color">{{question.viewCount}} Views</span></i>
+                                   <div class="answerCount font-size-12 px-1">
+                                        {{question.answersCount}} Answers
+                                   </div>
+                              </div>
+                              <div class="pr-3 font-size-12 app-color font-weight-500">
+                                   <div *ngIf="!question.status else resolved">
+                                        {{question.questionTime}}
+                                   </div>
+                                   <ng-template #resolved>
+                                        <span class="text-success font-weight-500">Resolved</span>
+                                   </ng-template>
+                              </div>
+                         </div>
+                    </div>
+               </div>
+               <div class="col-sm-6 px-0">
+                    <div *ngIf="!questionSelected" class="right-container">
+                         <div class="text-center arrow-icon">
+                              <i class="fas fa-arrow-left "></i>
+                              <div class="font-size-28 text-center">
+                                   Select a Question to See Details
+                              </div>
+                         </div>
+                    </div>
+                    <div *ngIf="questionSelected" class="right-container">
+                         <!-- <router-outlet></router-outlet> -->
+                         <app-answer [questionId]=currentQuestionId></app-answer>
+                    </div>
+               </div>               
+          </div>
+     </div>
+</div>
+
+
+
+

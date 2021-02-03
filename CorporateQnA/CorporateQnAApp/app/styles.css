@@ -1,0 +1,389 @@
+@import '~ngx-toastr/toastr.css';
+
+*:not(div):focus {
+     outline: 0;
+   }
+
+.title-bar{
+     background-color: rgb(118,97,139);
+     height: 50px;
+}
+.keka-logo{
+     background-color: rgb(82,67,97);
+     width: 100px;
+     padding: 10px 10px 14px 10px;
+}
+
+.user-image{
+     margin-top: -5px;
+}
+
+.dark-purple{
+     color: #70588a;
+}
+.top-menu{
+     padding: 10px 10px 14px 10px;
+}
+.font-size-14{
+     font-size: 14px;
+}
+.font-size-12{
+     font-size: 12px;
+}
+.app-container{
+     padding-left: 100px !important;
+    padding-top: 50px !important;
+}
+.top-nav{
+     height: 44px;
+     background-color: #fff;
+     box-shadow: 3px 0px 6px 0px #d8dde6;
+     border-bottom: 2px solid rgb(212,215,220);
+}
+a{
+     color: white;
+     cursor: pointer;
+}
+a:hover{
+     text-decoration: none;
+     color:white
+}
+.top-nav li{
+     position: relative;
+     padding-top: 12px;
+     padding-left: 5px;
+}
+.top-nav-link, .top-nav-link:hover{
+     color: rgb(134,134,134) !important;
+     font-size: 12px;
+     font-weight: 600;
+}
+.active a{
+     color: rgb(35,35,35) !important;
+     font-size: 12px;
+     font-weight: 600;
+}
+.top-nav.nav li a:after {
+     content: '';
+     position: absolute;
+     bottom: -1px;
+     border-left: 7px solid transparent;
+     border-right: 7px solid transparent;
+     border-bottom: 7px solid;
+     transition: 0.3s;
+     opacity: 0;
+     left: 6%;
+     border-bottom-color: rgb(118,97,139)
+ }
+.top-nav li.active a:after{
+    opacity: 1;
+    left: 40%;
+}
+.filter-options{
+     background-color: rgb(248,248,249);
+     border-bottom: 2px solid rgb(212,215,220);
+}
+.filter-options-heading{
+     font-size: small;
+     font-weight: 500;
+     color: rgb(93,93,94);
+}
+.keyword-search{
+     font-family:Arial, FontAwesome;
+     width: 300px;
+}
+
+select{
+     width: 250px !important;
+}
+.purple-color{
+     background-color:  rgb(118,97,139);
+}
+.add{
+     background-color:  rgb(118,97,139);
+     border: 0;
+     margin-top: 30px; 
+}
+.add:hover{
+     background-color:  rgb(118,97,139);
+}
+
+.main-container{
+     background-color: rgb(244,245,248);
+     padding-top: 1px;
+     padding-bottom: 1px;
+}
+.home-main{
+     background-color: white;
+     border: 1px solid rgb(212,215,220);
+     border-radius: 5px;
+}
+.question-container{
+     border-bottom: 1px solid rgb(212,215,220);
+     
+}
+.resolved-question{
+     position: absolute;
+     left: -13px;
+     transform: rotate(-45deg);
+     border-left: 20px solid transparent;
+     margin-top: -3px;
+     border-right: 20px solid transparent;
+     border-bottom: 20px solid #28a745;
+}
+.home-left-container{
+     border-right: 1px solid rgb(212,215,220);
+}
+.avatar-image {
+     border-radius: 50%;
+}
+.font-weight-500{
+     font-weight: 500;
+}
+.font-size-16{
+     font-size: 16px;
+}
+.question-title{
+     font-size: 14px;
+     font-weight: 500;
+     color: black;
+}
+.question-description{
+     font-weight: 500;
+}
+.active-question{
+     background-image: linear-gradient(to left, rgb(118,97,139) 0.1%, rgb(118,97,139) 0.4%, rgb(242,241,240) 0.6%, rgb(242,241,240) 100%)
+}
+.arrow {
+     border: solid grey;
+     border-width: 0 2px 2px 0;
+     display: inline-block;
+     padding: 3px;
+}
+.up {
+     transform: rotate(-135deg);
+     -webkit-transform: rotate(-135deg);
+}
+
+.arrow-up{
+
+     margin-top: 15px;
+}
+.upvotes{
+     margin-top: -10px;
+     margin-left: -4px;
+}
+.font-arial{
+     font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+.font-size-10{
+     font-size: 10px;
+}
+.font-size-11{
+     font-size: 11px;
+}
+.app-color{
+     color:  rgb(131,131,131)
+}
+.answerCount{
+     background-color: rgb(244,245,248);
+     color: rgb(131,131,131);
+     border: 2px solid rgb(131,131,131);
+     border-radius: 4px;
+}
+.right-container{
+     background-color: rgb(248,248,249);
+     height: 100%;
+}
+.arrow-icon{
+     padding-top: 50%;
+     padding-bottom: 50%;
+}
+.font-size-28{
+     font-size: 28px;
+}
+.selected-question{
+     background-color: rgb(242,241,240) !important;
+}
+.line-height-1-6{
+     line-height: 1.6;
+}
+.noOfAnswers{
+     background-color: rgb(228,230,233);
+     border-top: 1px solid rgb(212,215,220) ;
+     border-bottom: 1px solid  rgb(212,215,220);
+}
+.thumbs-icon{
+     font-size: 18px;
+}
+.thums-down-icon{
+     color: red;
+}
+.NgxEditor__Wrapper{
+     border: 2px solid  rgb(212,215,220) !important;
+     font-size: 13px;
+     border-radius: 6px;
+     padding-bottom: 10px;
+     background-color: white !important;
+}
+.NgxEditor{
+     height: 100px !important;
+     overflow-y: scroll;
+}
+.NgxEditor__Wrapper .NgxEditor__MenuBar{
+     border-bottom: 0 !important;
+}
+.NgxEditor__MenuBar{
+     background-color: white;
+}
+
+.top-bar {
+     background-color: purple;
+}
+
+.side-bar {
+     color: #ffffff;
+     margin: 0;
+     padding: 0;
+     padding-top: 50px !important;
+     height: 100%;
+     display: block;
+     background-color: #565357;
+     position: fixed;
+}
+.side-bar li {
+     width: 100px;
+     padding: 15px 15px;
+     text-align: center;
+     background-color: #8e8b8f;
+}
+.side-bar li:hover {
+     cursor: pointer;
+     background-color: #8e8b8f;
+   }
+
+   .add-heading{
+        background-color: rgb(81,89,104);
+   }
+
+   .grey-color{
+        background-color: rgb(164,170,178);
+   }
+
+   .cursor-ptr{
+        cursor: pointer;
+   }
+/* .container-right{
+     height: 100%;
+     border-collapse: collapse;
+     display: table;
+   } */
+/* .editor{
+     display: table-row;
+     vertical-align: bottom;
+     height: 1px;
+} */
+
+.checkbox-container input{
+     display: none;
+   }
+   .checkbox-container{
+     display: inline-block;
+     position: relative;
+   
+   }
+   .checkmark{
+     display: inline-block;
+     height: 16px;
+     width: 16px;
+     position: absolute;
+     /* top: 1;
+     left: 0; */
+     border: 1px solid black;
+     margin-bottom: 10px !important;
+     background-color: white;
+     cursor: pointer;
+   }
+   .checkbox-container input:checked + .checkmark{
+   background-color:rgb(134,192,106);
+   
+   }
+   .checkbox-container input:checked + .checkmark:after{
+     content: "";
+     position: absolute;
+     height: 6px;
+     width: 9px;
+     border-left: 2px solid white;
+     border-bottom: 2px solid white;
+     top: 45%;
+     left: 50%;
+     transform: translate(-50%,-50%) rotate(-60deg);
+     }
+
+
+.tab-header{
+text-align: center;
+}
+
+.tab-header h2.active {
+color: #fff;
+border-bottom: 4px solid #fff;
+}
+
+.tab-header h2 {
+text-align: center;
+font-size: 18px;
+font-weight: 600;
+display:inline-block;
+padding: 30px 40px 10px 40px;
+cursor: pointer;
+color: #545d6a;
+border-bottom: 2px solid #545d6a;
+}
+
+.tab-header h2:focus {
+     outline: none;
+}
+.wrapper {
+display: flex;
+align-items: center;
+flex-direction: column; 
+justify-content: center;
+width: 100%;
+padding: 20px;
+}
+
+.wrapped-div {
+-webkit-border-radius: 10px 10px 10px 10px;
+border-radius: 10px 10px 10px 10px;
+background: #2e3137;
+padding: 30px;
+width: 90%;
+max-width: 450px;
+position: relative;
+padding: 0px;
+-webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+}
+
+.border{
+     border: 2px solid #dee2e6 !important;
+     border-radius: 6px;
+}
+.min-width-150{
+     min-width: 150px;
+}
+.user-info-hover:hover,
+.user-info-active {
+     color: black;
+     font-weight: 500;
+     text-decoration: none;
+     cursor: pointer;
+     background-image: linear-gradient(
+       to bottom,
+       white 0%,
+       white 95%,
+       #70588a 95%,
+       #70588a 100%
+     );
+   }

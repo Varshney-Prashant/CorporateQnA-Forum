@@ -16,7 +16,7 @@ namespace CorporateQnA.Controllers
         }
 
         [Route("all")]
-        public IEnumerable<Models.Models.ViewModels.QuestionWithUserViewModel> Get()
+        public IEnumerable<QuestionWithUserViewModel> Get()
         {
             return QuestionService.GetQuestions();
         }
@@ -71,6 +71,12 @@ namespace CorporateQnA.Controllers
         public void UpdateActivity(int id, QuestionActivity activity)
         {
             QuestionService.UpdateActivity(id, activity);
+        }
+
+        [Route("addActivity")]
+        public int PostActivity(QuestionActivity activity)
+        {
+            return QuestionService.PostActivity(activity);
         }
 
         [Route("delete/{id}")]

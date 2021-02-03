@@ -9,3 +9,4 @@ tct.MonthTags AS WeekTags,
 tct.WeekTags AS MonthTags
 FROM Categories
 JOIN TotalCategoryTags tct ON Categories.Id=tct.CategoryId
+WHERE Categories.IsDeleted=0

@@ -22,12 +22,13 @@ namespace CorporateQnAServices.Services.UserServices
         {
             return db.Fetch<DataModels.UserInfoViewModel>("SELECT * FROM UserInfoView")
                 .MapCollectionTo<DataModels.UserInfoViewModel, ViewModels.UserInfoViewModel>();
-                ;
         }
 
         public ViewModels.UserInfoViewModel GetUser(string id)
         {
-            return db.SingleOrDefault<DataModels.UserInfoViewModel>(@"SELECT * FROM UserInfoView WHERE Id=@id", new { id }).MapTo<ViewModels.UserInfoViewModel>();
+            return db.SingleOrDefault<DataModels.UserInfoViewModel>
+                (@"SELECT * FROM UserInfoView WHERE Id=@id", new { id })
+                .MapTo<ViewModels.UserInfoViewModel>();
         }
 
         public void Like(string id)

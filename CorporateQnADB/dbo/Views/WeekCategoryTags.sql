@@ -2,12 +2,12 @@
 AS
 SELECT Categories.Id AS CategoryId,
 CASE
-	WHEN WeekTagsTable.WeekTag IS NULL Then 0
+	WHEN WeekTagsTable.WeekTag IS NULL THEN 0
 	ELSE WeekTagsTable.WeekTag
 END AS WeekTags
-from Categories
-left join( SELECT CategoryId, count(*) AS WeekTag from Questions q
-where q.PostingTime>=(SELECT * FROM WeekStartingDate)
-and q.PostingTime<=(SELECT * FROM WeekEndingDate)
-group by CategoryId)
-as WeekTagsTable on Categories.Id=WeekTagsTable.CategoryId
+FROM Categories
+LEFT JOIN( SELECT CategoryId, COUNT(*) AS WeekTag FROM Questions q
+WHERE q.PostingTime>=(SELECT * FROM WeekStartingDate)
+AND q.PostingTime<=(SELECT * FROM WeekEndingDate)
+GROUP BY CategoryId)
+AS WeekTagsTable ON Categories.Id=WeekTagsTable.CategoryId

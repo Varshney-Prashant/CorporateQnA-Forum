@@ -19,15 +19,14 @@ namespace CorporateQnA.Services.QuestionService
         public IEnumerable<ViewModels.QuestionWithUserViewModel> GetQuestions()
         {
             List<DataModels.QuestionWithUserViewModel> questions = db.Fetch<DataModels.QuestionWithUserViewModel>("SELECT * FROM QuestionWithUserView ");
-            var x= questions.MapCollectionTo<DataModels.QuestionWithUserViewModel, ViewModels.QuestionWithUserViewModel>();
-            return x;
+            return questions.MapCollectionTo<DataModels.QuestionWithUserViewModel, ViewModels.QuestionWithUserViewModel>();           
         }
 
         public IEnumerable<ViewModels.QuestionWithUserViewModel> GetQuestionsByUserId(string id)
         {
             return db.Fetch<DataModels.QuestionWithUserViewModel>(@"SELECT * FROM Questions WHERE UserId=@id", new { id})
                 .MapCollectionTo<DataModels.QuestionWithUserViewModel, ViewModels.QuestionWithUserViewModel>();
-        }
+        }       
 
         public CoreModels.Question GetQuestion(int id)
         {
@@ -39,11 +38,10 @@ namespace CorporateQnA.Services.QuestionService
 
         public ViewModels.QuestionWithUserViewModel GetQuestionWithUser(int id)
         {
-            var x= db.SingleOrDefault<DataModels.QuestionWithUserViewModel>(
+            return db.SingleOrDefault<DataModels.QuestionWithUserViewModel>(
                     @"SELECT * FROM QuestionWithUserView WHERE QuestionId=@id",
                     new { id }
                     ).MapTo<ViewModels.QuestionWithUserViewModel>();
-            return x;
         }
 
         public ViewModels.QuestionWithUserViewModel GetQuestionsByCategoryId(int id)
@@ -57,6 +55,13 @@ namespace CorporateQnA.Services.QuestionService
         public int GetAnswerCount(int id)
         {
             return db.ExecuteScalar<int>(@"UPDATE Questions SET AnswersCount=AnswersCount+1 OUTPUT CAST(INSERTED.AnswersCount AS INT) WHERE Id=@id", new { id });
+        }
+
+        public int PostActivity(CoreModels.QuestionActivity activity)
+        {
+            return Convert.ToInt32(db.Insert(
+                activity.MapTo<DataModels.QuestionActivity>())
+                );
         }
 
         public int PostQuestion(CoreModels.Question question)
