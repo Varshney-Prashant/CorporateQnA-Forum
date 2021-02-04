@@ -17,8 +17,10 @@ const routes: Routes = [
 			{ path: 'register', component: RegistrationComponent }
 		]
 	},
-	{ path:'user',component:UserListComponent },
-	{ path:'user-details/:id',component:UserDetailsComponent },
+	{ path:'user',component:UserListComponent , children:[
+		{ path:'user-details/:id',component:UserDetailsComponent }
+	]},
+	
 	{
 		path: 'home', component: HomeComponent, canActivate: [AuthGuardGuard],
 		children: [

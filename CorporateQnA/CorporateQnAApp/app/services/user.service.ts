@@ -10,15 +10,12 @@ import { QuestionWithUser,UserInfoView } from '../models';
 export class UserService {
 
 	@Output() userQuestions:EventEmitter<QuestionWithUser[]> =new EventEmitter<QuestionWithUser[]>();
+	@Output() onUsersPage:EventEmitter<boolean>=new EventEmitter<boolean>();
+	@Output() backToUsersPage:EventEmitter<boolean>=new EventEmitter<boolean>();
 	user:UserInfoView=new UserInfoView({});
 	private apiUrl ="api/user";
+
 	constructor(private httpClient:HttpClient) { }
-	
-	httpOptions = {
-		headers: new HttpHeaders({
-			'Content-Type': 'application/json'
-		})
-	}
 
 	getUser(id:string):Observable<UserInfoView>{
 		return this.httpClient.get<UserInfoView>(this.apiUrl+'/'+id);

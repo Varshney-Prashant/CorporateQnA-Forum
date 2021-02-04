@@ -33,11 +33,12 @@ export class UserDetailsComponent implements OnInit {
 	}
 
 	goBack() {
+		this.userService.backToUsersPage.emit(true)
 		this.router.navigate(['user'])
 	}
+
 	likeUser(){
 		this.user.noOfLikes=this.user.noOfLikes+1;
-		console.log(this.user.id)
 		this.userService.likeUser(this.user.id).subscribe();
 	}
 

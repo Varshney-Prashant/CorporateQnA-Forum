@@ -8,13 +8,7 @@
 			</div>
 			<div class="form-group category-dropdown mr-3">
 				<label for="keywords" class="home-options-heading">Show</label>
-				<select class="form-control" id=show [(ngModel)]="showFilter" (change)="filterCategories()">
-					<!-- <option value="all">ALL</option>
-                         <option value="myQuestions">My Questions</option>
-                         <option value="myParticipation">My Participation</option>
-                         <option value="hot">Hot</option>
-                         <option value="solved">Solved</option>
-                         <option value="unsolved">UnSolved</option> -->
+				<select class="form-control" id=show [(ngModel)]="showFilter" >
 					<option value="popular">POPULAR</option>
 				</select>
 			</div>
@@ -41,10 +35,10 @@
 		</div>
 	</div>
 	<form [formGroup]="addCategoryForm">
-		<div class="modal-body row font-size-13px">
+		<div class="modal-body row">
 			<div class="form-group col-sm-9">
 				<label>Category Name</label>
-				<input type="text" class="form-control" placeholder="Enter Category Name" style="font-size: 13px;"
+				<input type="text" class="form-control" placeholder="Enter Category Name" 
 					formControlName="name">
 			</div>
 			<div class="form-group col-sm-9">
@@ -58,8 +52,7 @@
 					<button type="button" class="btn px-3 grey-color text-white" (click)="closeModal()">Cancel</button>
 					<button class="btn px-3 ml-2 purple-color text-white" (click)="addCategory()">Post</button>
 				</div>
-			</div>
-			
+			</div>			
 		</div>
 	</form>
 </ng-template>

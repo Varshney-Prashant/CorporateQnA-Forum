@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserInfoView } from '../models';
 import { UserService } from '../services';
 
@@ -11,7 +11,8 @@ export class UserListComponent implements OnInit {
 
 	searchText: string="";
 	users:UserInfoView[]=[];
-	constructor(private userService:UserService, private router:Router) { }
+	showDetails:boolean=false;
+	constructor(private userService:UserService, private router:Router, private route:ActivatedRoute) { }
 
 	ngOnInit(): void {
 		this.userService.getUsers().subscribe(
@@ -19,12 +20,21 @@ export class UserListComponent implements OnInit {
 				this.users=res;
 			}
 		)
+		this.userService.onUsersPage.emit(true)		
 
+		this.userService.backToUsersPage.subscribe(
+			(res: any)=>{
+				if(res){
+					this.showDetails=false;
+				}
+			}
+		)
 	}
 	
 	showUser(currentUser:UserInfoView){
+		this.showDetails=true;
 		this.userService.user=currentUser;
-		this.router.navigate(['/user-details',currentUser.id]);
+		this.router.navigate(['user/user-details',currentUser.id]);
 	}
 
 }

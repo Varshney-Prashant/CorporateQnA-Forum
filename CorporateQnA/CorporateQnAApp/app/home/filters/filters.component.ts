@@ -21,7 +21,7 @@ export class FiltersComponent implements OnInit {
 	question: Question = new Question({});
 	questionSelected: boolean = false;
 	allQuestions: QuestionWithUser[] = [];
-	questionActivity:QuestionActivity=new QuestionActivity({})
+	questionActivity: QuestionActivity = new QuestionActivity({})
 	categories: Category[] = [];
 	categoryId: number = 0;
 	searchText: string = ""
@@ -102,17 +102,16 @@ export class FiltersComponent implements OnInit {
 		this.question.answersCount = 0;
 		this.questionService.addQuestion(this.question).subscribe(
 			res => {
-				this.questionActivity.questionId=res;
+				this.questionActivity.questionId = res;
 				this.questionService.addActivity(this.questionActivity).subscribe();
 				this.toastr.success("Question Added", "Successfully")
-				this.getQuestions();				
+				this.getQuestions();
 			}
-		)		
+		)
 		this.closeModal();
 	}
 
 	openModal(template: TemplateRef<any>) {
-		console.log(template)
 		this.modalRef = this.modalService.show(template, this.config);
 	}
 
@@ -121,14 +120,13 @@ export class FiltersComponent implements OnInit {
 	}
 
 	resetFilters() {
-		console.log("erreferf");
 		this.categoryId = 0;
 		this.showFilter = "all";
 		this.sortByFilter = "all";
 		this.searchText = "";
 		this.questions = this.allQuestions;
 		this.searchFilter.emit(this.searchText);
-		this.filteredQuestions.emit(this.questions);
+		this.getQuestions();
 	}
 
 	searchTextFilter() {
@@ -147,33 +145,32 @@ export class FiltersComponent implements OnInit {
 	filterByUserId = (id: string, questions: QuestionWithUser[]) => {
 		questions = questions.filter(
 			question => {
-				console.log(question.userId==id)
+				console.log(question.userId == id)
 				return question.userId == id;
 			}
 		)
 		return questions;
 	}
 
-	filterByStatus=(s:QuestionStatus, questions:QuestionWithUser[])=>{
-		questions=questions.filter(
-			question=>{
-				console.log(question.status==s)
-				return question.status==s
+	filterByStatus = (s: QuestionStatus, questions: QuestionWithUser[]) => {
+		questions = questions.filter(
+			question => {
+				return question.status == s
 			}
 
 		)
 		return questions;
 	}
 
-	filterByNoOfDays=(noOfDays:number, questions:QuestionWithUser[])=>{
-		questions=questions.filter(
-			question=>{
+	filterByNoOfDays = (noOfDays: number, questions: QuestionWithUser[]) => {
+		questions = questions.filter(
+			question => {
 				var diff = Math.abs((new Date).getTime() - (new Date(question.postingTime)).getTime());
 				var diffDays = Math.ceil(diff / (1000 * 3600 * 24));
-				console.log(diffDays<=noOfDays)
-				return diffDays<=noOfDays;
+				console.log(diffDays <= noOfDays)
+				return diffDays <= noOfDays;
 			}
-			
+
 		)
 		return questions;
 	}
@@ -185,26 +182,29 @@ export class FiltersComponent implements OnInit {
 			this.questions = this.filterByCategory(this.categoryId, this.questions)
 		else
 			this.questions = this.allQuestions;
-		if (this.showFilter == "myQuestions" || this.showFilter == "myParticipation") {
+		if(this.showFilter=="all" && this.sortByFilter=="all" && this.categoryId==0){
+			this.questions=this.allQuestions;
+		}
+		else if (this.showFilter == "myQuestions" || this.showFilter == "myParticipation") {
 			this.questions = this.filterByUserId(localStorage.getItem('userId')!, this.questions)
 		}
 		else if (this.showFilter == "hot") {
-			//get hot questions
+			this.questions=this.questions.sort((a, b) =>{ return  b.upVotes - a.upVotes })
 		}
 		else if (this.showFilter == "solved") {
-			this.questions=this.filterByStatus(QuestionStatus.resolved,this.questions);		
+			this.questions = this.filterByStatus(QuestionStatus.resolved, this.questions);
 		}
 		else if (this.showFilter == "unsolved") {
-			this.questions=this.filterByStatus(QuestionStatus.unResolved,this.questions);
+			this.questions = this.filterByStatus(QuestionStatus.unResolved, this.questions);
 		}
 		if (this.sortByFilter == "recent") {
-			this.questions.sort((a, b) => a.postingTime >b.postingTime ? -1 : a.postingTime > b.postingTime ? 1 : 0)
+			this.questions.sort((a, b) => a.postingTime > b.postingTime ? -1 : a.postingTime < b.postingTime ? 1 : 0)
 		}
 		else if (this.sortByFilter == "last10Days") {
-			this.questions=this.filterByNoOfDays(10,this.questions) 		
+			this.questions = this.filterByNoOfDays(10, this.questions)
 		}
 		else if (this.sortByFilter == "last30Days") {
-			this.questions=this.filterByNoOfDays(30, this.questions)
+			this.questions = this.filterByNoOfDays(30, this.questions)
 		}
 
 		this.filteredQuestions.emit(this.questions);

@@ -1,6 +1,5 @@
 import { Component, Input, OnInit, TemplateRef } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
 
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Editor, Toolbar } from 'ngx-editor';
@@ -23,6 +22,7 @@ export class AnswerComponent implements OnInit {
 	answers: AnswerWithUser[] = [];
 	bestAnswer: boolean = false;
 	modalRef!: BsModalRef;
+	expand:boolean=false;
 	icons: Icons = new Icons;
 	editor: Editor = new Editor;
 	answerForm!: FormGroup;
@@ -68,6 +68,7 @@ export class AnswerComponent implements OnInit {
 	}
 
 	submitAnswer(){
+		this.expand=false;
 		this.activeAnswer.postingTime=new Date();
 		this.activeAnswer.userId=localStorage.getItem('userId')!;
 		this.activeAnswer.questionId=this.questionId;
@@ -92,18 +93,15 @@ export class AnswerComponent implements OnInit {
 		);
 	}
 
-	openModal(template: TemplateRef<any>) {
-		this.modalRef = this.modalService.show(template, this.config);
-	}
-	closeModal() {
-		this.modalRef.hide();
+	expandEditor(){
+		this.expand=!this.expand;
 	}
 
 	like(answer: AnswerWithUser) {
 		answer.noOfLikes = answer.noOfLikes + 1;
 		this.activeAnswer=new Answer(answer);
 		this.activeAnswer.id = answer.answerId;
-		this.answerService.updateAnswer(this.activeAnswer).subscribe()									//check
+		this.answerService.updateAnswer(this.activeAnswer).subscribe();					
 
 	}
 
@@ -111,27 +109,19 @@ export class AnswerComponent implements OnInit {
 		answer.noOfDislikes = answer.noOfDislikes + 1;
 		this.activeAnswer=new Answer(answer);
 		this.activeAnswer.id = answer.answerId;
-		this.answerService.updateAnswer(this.activeAnswer).subscribe()
+		this.answerService.updateAnswer(this.activeAnswer).subscribe();
 	}
 
 	markAsBestAnswer(answerChecked: AnswerWithUser, event: Event) {
-		console.log("checkbox")
-		
 		var bestAnswerExists = false;
-		console.log(this.answers)
 		this.answers.forEach(answer => {
 			if (answer.bestAnswer) {
-				if(answerChecked.answerId==answer.answerId){
-					
-				}
 				event.preventDefault();
 				answerChecked.bestAnswer=false
-				console.log(answer)
 				bestAnswerExists = true;
 			}
 		});
 		if (!bestAnswerExists) {
-			console.log("yahan")
 			answerChecked.bestAnswer = true;
 			this.activeAnswer=new Answer(answerChecked);
 			this.activeAnswer.id = answerChecked.answerId;
@@ -142,6 +132,7 @@ export class AnswerComponent implements OnInit {
 					this.activeQuestion=new Question(this.selectedQuestion);
 					this.activeQuestion.id=this.selectedQuestion.questionId;
 					this.activeQuestion.status=QuestionStatus.resolved;
+					this.activeQuestion.answersCount=this.selectedQuestion.answersCount;
 					this.questionService.updateQuestion(this.activeQuestion.id, this.activeQuestion).subscribe(
 						res=>{
 							this.answerService.MarkQuestion.emit(true);
@@ -151,7 +142,6 @@ export class AnswerComponent implements OnInit {
 			);
 		}
 		else {
-			// answerChecked.bestAnswer = false
 			this.toastr.warning("Only One Answer Can Be Marked As Best Answer","Warning")
 		}
 

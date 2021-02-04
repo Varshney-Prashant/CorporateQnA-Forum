@@ -62,21 +62,18 @@ export class HomeComponent implements OnInit, DoCheck {
 			keyboardShortcuts: true
 		});
 
-		this.addQuestionForm = new FormGroup({
-			'question': new FormControl(null, Validators.required)!,
-			'description': new FormControl(null, [Validators.required, Validators.email])!,
-			'Id': new FormControl(null, Validators.required),
-		})!;
+		this.initializeForm();
 
 		this.getQuestions();
 		this.answerService.RefreshList.subscribe(
 			(value: any)=>{
+				console.log("erferf");
 				this.getQuestions();
 			   }
 		)
 		this.answerService.MarkQuestion.subscribe(
 			(value: any)=>{
-				this.getQuestions();
+				this.getQuestions()
 			   }
 		)
 
@@ -91,15 +88,17 @@ export class HomeComponent implements OnInit, DoCheck {
 		this.showFilters = this.router.url.indexOf('user-details') == -1;
 	}
 
-	InitializeForm() {
-			//check
+	initializeForm() {
+		this.addQuestionForm = new FormGroup({
+			'question': new FormControl(null, Validators.required)!,
+			'description': new FormControl(null, [Validators.required, Validators.email])!,
+			'Id': new FormControl(null, Validators.required),
+		})!;
 	}
 
 	getQuestions() {
-		//check
 		this.questionService.getQuestions().subscribe(
 			res => {
-				console.log(res)
 				this.questionService.questions = res;
 				this.questions = res;
 				this.allQuestions = res;
@@ -127,9 +126,10 @@ export class HomeComponent implements OnInit, DoCheck {
 			}
 		)
 	}
+
 	getFilteredQuestions(filteredQuestions: QuestionWithUser[]) {
 		this.questionSelected = false;
-		this.router.navigate(['home'])
+		this.selectedQuestion=new QuestionWithUser({})
 		this.questions = filteredQuestions;
 	}
 

@@ -12,6 +12,7 @@ import { AuthInterceptor } from './auth';
 import { CategoryListComponent, CategoryFiltersComponent, CategoryCardComponent } from './categories';
 import { UserListComponent, UserCardComponent, UserDetailsComponent } from './user-list';
 import { UserService } from './services';
+import { SearchPipe } from './shared';
 
 import { NgxEditorModule } from 'ngx-editor';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -19,7 +20,6 @@ import { FilterPipeModule } from 'ngx-filter-pipe';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SearchPipe } from './shared/search.pipe';
 
 
 @NgModule({

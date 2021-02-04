@@ -1,14 +1,21 @@
-<div class="filter-options">
-     <div class="d-flex pt-2 pl-4 pb-0 justify-content-between">
-          <div class="form-group mr-3">
-               <label for="keywords" class="filter-options-heading">Users</label>
-               <input type="text" name="search" [(ngModel)]="searchText" class="form-control keyword-search"
-                    placeholder="&#xF002; Search">
+<div *ngIf="showDetails">
+     <router-outlet></router-outlet>
+
+</div>
+<div *ngIf="!showDetails">
+     <div class="filter-options">
+          <div class="d-flex pt-2 pl-4 pb-0 justify-content-between">
+               <div class="form-group mr-3">
+                    <label for="keywords" class="filter-options-heading">Users</label>
+                    <input type="text" name="search" [(ngModel)]="searchText" class="form-control keyword-search"
+                         placeholder="&#xF002; Search">
+               </div>
+          </div>
+     </div>
+     <div class="main-container">
+          <div class="d-flex align-items-center flex-wrap">
+               <app-user-card *ngFor="let user of users | search:searchText" [user]="user" (click)="showUser(user)"></app-user-card>
           </div>
      </div>
 </div>
-<div class="main-container">
-     <div class="d-flex align-items-center flex-wrap">
-          <app-user-card *ngFor="let user of users | search:searchText" [user]="user" (click)="showUser(user)"></app-user-card>
-     </div>
-</div>
+

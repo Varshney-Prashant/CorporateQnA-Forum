@@ -1,6 +1,6 @@
 <app-category-filters (searchFilter)="filterBySearch($event)"></app-category-filters>
 <div class="main-container" *ngIf="isDataLoaded">
-    <div class="d-flex flex-wrap pt-2" style="max-width: 1050px;" >
+    <div class="d-flex flex-wrap pt-2 category-card-width" >
         <app-category-card  *ngFor="let category of categories | search:searchText" class="col-sm-4"
          [category]="category"></app-category-card>
      </div>

@@ -16,17 +16,12 @@ export class LoginService {
 
 	constructor(private httpClient:HttpClient) { }
 	  
-  	httpOptions = {
-    		headers: new HttpHeaders({
-	 	'Content-Type': 'application/json'
-    		})
-	}
 
   	registerUser(user:User): Observable<boolean> {
-    		return this.httpClient.post<boolean>(this.authUrl+'/register', JSON.stringify(user), this.httpOptions);
+    		return this.httpClient.post<boolean>(this.authUrl+'/register', user);
  	}
 
   	loginUser(user:User): Observable<any>{
-    		return this.httpClient.post<any>(this.authUrl+'/login',JSON.stringify(user),this.httpOptions);
+    		return this.httpClient.post<any>(this.authUrl+'/login',user);
   	} 
 }

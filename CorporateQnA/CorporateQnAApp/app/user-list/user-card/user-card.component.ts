@@ -17,7 +17,6 @@ export class UserCardComponent implements OnInit {
 
 	likeUser(){
 		this.user.noOfLikes=this.user.noOfLikes+1;
-		console.log(this.user.id)
 		this.userService.likeUser(this.user.id).subscribe();
 	}
 

@@ -4,6 +4,43 @@
      outline: 0;
    }
 
+.font-size-14{
+     font-size: 14px;
+}
+.font-size-12{
+     font-size: 12px;
+}
+.font-weight-500{
+     font-weight: 500;
+}
+.font-size-16{
+     font-size: 16px;
+}
+.font-arial{
+     font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+.font-size-10{
+     font-size: 10px;
+}
+.font-size-11{
+     font-size: 11px;
+}
+.font-size-28{
+     font-size: 28px;
+}
+.line-height-1-6{
+     line-height: 1.6;
+}
+.app-color{
+     color:  rgb(131,131,131)
+}
+.purple-color{
+     background-color:  rgb(118,97,139);
+}
+.dark-purple{
+     color: #70588a;
+}
+
 .title-bar{
      background-color: rgb(118,97,139);
      height: 50px;
@@ -18,18 +55,10 @@
      margin-top: -5px;
 }
 
-.dark-purple{
-     color: #70588a;
-}
 .top-menu{
      padding: 10px 10px 14px 10px;
 }
-.font-size-14{
-     font-size: 14px;
-}
-.font-size-12{
-     font-size: 12px;
-}
+
 .app-container{
      padding-left: 100px !important;
     padding-top: 50px !important;
@@ -96,9 +125,7 @@ a:hover{
 select{
      width: 250px !important;
 }
-.purple-color{
-     background-color:  rgb(118,97,139);
-}
+
 .add{
      background-color:  rgb(118,97,139);
      border: 0;
@@ -119,8 +146,7 @@ select{
      border-radius: 5px;
 }
 .question-container{
-     border-bottom: 1px solid rgb(212,215,220);
-     
+     border-bottom: 1px solid rgb(212,215,220);     
 }
 .resolved-question{
      position: absolute;
@@ -136,12 +162,6 @@ select{
 }
 .avatar-image {
      border-radius: 50%;
-}
-.font-weight-500{
-     font-weight: 500;
-}
-.font-size-16{
-     font-size: 16px;
 }
 .question-title{
      font-size: 14px;
@@ -173,18 +193,6 @@ select{
      margin-top: -10px;
      margin-left: -4px;
 }
-.font-arial{
-     font-family:Verdana, Geneva, Tahoma, sans-serif;
-}
-.font-size-10{
-     font-size: 10px;
-}
-.font-size-11{
-     font-size: 11px;
-}
-.app-color{
-     color:  rgb(131,131,131)
-}
 .answerCount{
      background-color: rgb(244,245,248);
      color: rgb(131,131,131);
@@ -199,15 +207,11 @@ select{
      padding-top: 50%;
      padding-bottom: 50%;
 }
-.font-size-28{
-     font-size: 28px;
-}
+
 .selected-question{
      background-color: rgb(242,241,240) !important;
 }
-.line-height-1-6{
-     line-height: 1.6;
-}
+
 .noOfAnswers{
      background-color: rgb(228,230,233);
      border-top: 1px solid rgb(212,215,220) ;
@@ -227,7 +231,8 @@ select{
      background-color: white !important;
 }
 .NgxEditor{
-     height: 100px !important;
+     height: 150px ;
+     width: 400px ;
      overflow-y: scroll;
 }
 .NgxEditor__Wrapper .NgxEditor__MenuBar{
@@ -236,9 +241,20 @@ select{
 .NgxEditor__MenuBar{
      background-color: white;
 }
+.expand-editor .NgxEditor{
+     height: 300px !important;
+     width: 700px !important;
+     overflow-y: scroll;
+}
 
 .top-bar {
      background-color: purple;
+}
+
+.answer-form{
+     position: fixed;
+     bottom: 0;
+     right: 0;
 }
 
 .side-bar {
@@ -270,20 +286,13 @@ select{
         background-color: rgb(164,170,178);
    }
 
+   .category-card-width{
+        max-width: 1050px;
+   }
+
    .cursor-ptr{
         cursor: pointer;
    }
-/* .container-right{
-     height: 100%;
-     border-collapse: collapse;
-     display: table;
-   } */
-/* .editor{
-     display: table-row;
-     vertical-align: bottom;
-     height: 1px;
-} */
-
 .checkbox-container input{
      display: none;
    }
@@ -297,8 +306,6 @@ select{
      height: 16px;
      width: 16px;
      position: absolute;
-     /* top: 1;
-     left: 0; */
      border: 1px solid black;
      margin-bottom: 10px !important;
      background-color: white;
@@ -354,16 +361,16 @@ padding: 20px;
 }
 
 .wrapped-div {
--webkit-border-radius: 10px 10px 10px 10px;
-border-radius: 10px 10px 10px 10px;
-background: #2e3137;
-padding: 30px;
-width: 90%;
-max-width: 450px;
-position: relative;
-padding: 0px;
--webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+     -webkit-border-radius: 10px 10px 10px 10px;
+     border-radius: 10px 10px 10px 10px;
+     background: #2e3137;
+     padding: 30px;
+     width: 90%;
+     max-width: 450px;
+     position: relative;
+     padding: 0px;
+     -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+     box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
 }
 
 .border{

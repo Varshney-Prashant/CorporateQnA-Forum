@@ -43,7 +43,6 @@ export class CategoryFiltersComponent implements OnInit {
 	}
 
 	searchTextFilter() {
-		console.log(this.searchText)
 		this.searchFilter.emit(this.searchText)
 	}
 
@@ -51,16 +50,13 @@ export class CategoryFiltersComponent implements OnInit {
 		this.searchText = "";
 		this.searchFilter.emit(this.searchText)
 	}
+
 	openModal(template: TemplateRef<any>) {
-		console.log(template)
 		this.modalRef = this.modalService.show(template, this.config);
 	}
 	
 	closeModal() {
 		this.modalRef.hide();
-	}
-	filterCategories(){
-		
 	}
 
 	addCategory(){

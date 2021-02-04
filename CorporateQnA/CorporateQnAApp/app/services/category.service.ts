@@ -14,11 +14,6 @@ export class CategoryService {
 	
 	constructor(private httpClient: HttpClient) { }
 
-	httpOptions = {
-		headers: new HttpHeaders({
-			'Content-Type': 'application/json'
-		})
-	}
 	getCategories(): Observable<Category[]> {
 		return this.httpClient.get<Category[]>(this.apiUrl + '/all');
 	}
@@ -28,7 +23,7 @@ export class CategoryService {
 	}
 
 	addCategory(category:Category):Observable<number>{
-		return this.httpClient.post<number>(this.apiUrl+'/add',category, this.httpOptions);
+		return this.httpClient.post<number>(this.apiUrl+'/add',category);
 	}
 
 }

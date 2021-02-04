@@ -14,13 +14,9 @@ export class AnswerService {
 	private apiAnswerUrl = "api/answer";
 	@Output() RefreshList:EventEmitter<boolean> = new EventEmitter();
 	@Output() MarkQuestion:EventEmitter<boolean> = new EventEmitter();
+
 	constructor(private httpClient: HttpClient) { }
 
-	httpOptions = {
-		headers: new HttpHeaders({
-			'Content-Type': 'application/json'
-		})
-	}
 	getQuestionWithUser(id: number): Observable<QuestionWithUser> {
 		return this.httpClient.get<QuestionWithUser>(this.apiUrl + '/questionWithUser/' + id);
 	}
@@ -35,7 +31,7 @@ export class AnswerService {
 	}
 
 	updateAnswer(answer: Answer): Observable<void> {
-		return this.httpClient.put<void>(this.apiAnswerUrl + '/update/' + answer.id, answer, this.httpOptions);
+		return this.httpClient.put<void>(this.apiAnswerUrl + '/update/' + answer.id, answer);
 	}
 
 	addAnswer(answer:Answer):Observable<number>{

@@ -14,11 +14,6 @@ export class QuestionService {
 	private apiUrl = "api/question";
 	constructor(private httpClient: HttpClient) { }
 
-	httpOptions = {
-		headers: new HttpHeaders({
-			'Content-Type': 'application/json'
-		})
-	}
 	getQuestions(): Observable<QuestionWithUser[]> {
 		var res = this.httpClient.get<QuestionWithUser[]>(this.apiUrl + '/all');
 		console.log("reergrtgr");
@@ -30,11 +25,11 @@ export class QuestionService {
 	}
 
 	addQuestion(question: Question): Observable<number> {
-		return this.httpClient.post<number>(this.apiUrl + '/add', question, this.httpOptions);
+		return this.httpClient.post<number>(this.apiUrl + '/add', question);
 	}
 
 	updateActivity(questionActivity:QuestionActivity):Observable<any>{
-		return this.httpClient.put<any>(this.apiUrl+'/updateActivity/'+questionActivity.id,questionActivity,this.httpOptions);
+		return this.httpClient.put<any>(this.apiUrl+'/updateActivity/'+questionActivity.id,questionActivity);
 	}
 
 	addActivity(questionActivity:QuestionActivity):Observable<number>{
