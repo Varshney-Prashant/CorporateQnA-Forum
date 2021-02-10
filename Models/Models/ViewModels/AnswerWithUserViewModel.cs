@@ -9,7 +9,7 @@ namespace CorporateQnAModels.Models.ViewModels
     public class AnswerWithUserViewModel
     {
         public int AnswerId { get; set; }
-        public string Description { get; set; }
+        public string Content { get; set; }
         public string UserFullName { get; set; }
         public int NoOfLikes { get; set; }
         public int NoOfDislikes { get; set; }

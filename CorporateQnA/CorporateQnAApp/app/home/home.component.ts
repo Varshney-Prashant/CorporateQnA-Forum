@@ -67,7 +67,6 @@ export class HomeComponent implements OnInit, DoCheck {
 		this.getQuestions();
 		this.answerService.RefreshList.subscribe(
 			(value: any)=>{
-				console.log("erferf");
 				this.getQuestions();
 			   }
 		)

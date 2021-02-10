@@ -33,12 +33,12 @@ namespace CorporateQnAServices.Services.UserServices
 
         public void Like(string id)
         {
-            db.Execute(@"UPDATE AspNetUsers SET NoOfLikes=NoOfLikes+1 WHERE Id=@id", new { id });
+            db.Execute(@"UPDATE Employees SET NoOfLikes=NoOfLikes+1 WHERE Id=@id", new { id });
         }
 
         public void Dislike(string id)
         {
-            db.Execute(@"UPDATE AspNetUsers SET NoOfDislikes=NoOfDislikes+1 WHERE Id=@id", new { id });
+            db.Execute(@"UPDATE Employees SET NoOfDislikes=NoOfDislikes+1 WHERE Id=@id", new { id });
         }
     }
 }

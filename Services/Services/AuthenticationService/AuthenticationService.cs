@@ -15,6 +15,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
+using System.Configuration;
+using CoreModels = CorporateQnAModels.Models.CoreModels;
+using DataModels = CorporateQnAModels.Models.DataModels;
+using MappingExtensions;
 
 namespace CorporateQnA.Services.AuthenticationService
 {
@@ -23,35 +27,41 @@ namespace CorporateQnA.Services.AuthenticationService
         private UserStore<ApplicationUser> Store { get; }
         private UserManager<ApplicationUser> UserManager { get; }
         private readonly AuthenticationContext Context;
+        private readonly PetaPoco.Database db;
         public AuthenticationService(AuthenticationContext context)
         {
             Context = context;
             Store = new UserStore<ApplicationUser>(Context);
             UserManager = new UserManager<ApplicationUser>(Store);
+            db = new PetaPoco.Database(ConfigurationManager.ConnectionStrings["CorporateQNA"].ConnectionString, "System.Data.SqlClient");
         }
 
 
         public async Task<String> Register(RegisterViewModel registerCreds)
         {
-            if(registerCreds.ImageUrl=="")
-            {
-                registerCreds.ImageUrl = "https://www.shareicon.net/data/512x512/2017/01/06/868320_people_512x512.png";
-            }
             var user = new ApplicationUser
             {
                 UserName = registerCreds.EmailId,
-                Email = registerCreds.EmailId,
-                FullName = registerCreds.Name,
-                Designation = registerCreds.Designation,
+                Email = registerCreds.EmailId
+                /*Designation = registerCreds.Designation,
                 Company = registerCreds.Company,
                 NoOfLikes = 0,
                 NoOfDislikes = 0,
-                ImageUrl=registerCreds.ImageUrl
+                ImageUrl = registerCreds.ImageUrl*/
             };
             var Result = await UserManager.CreateAsync(user, registerCreds.Password);
 
+            var employee = new CoreModels.Employee
+            {
+                Id = user.Id,
+                FullName=registerCreds.Name,
+                Designation=registerCreds.Designation,
+                Company=registerCreds.Company,
+                ImageUrl=registerCreds.ImageUrl
+            };
             if (Result.Succeeded)
             {
+                db.Insert(employee.MapTo<DataModels.Employee>());
                 return "user Added";
             }
             return Result.Errors.First();
@@ -61,7 +71,9 @@ namespace CorporateQnA.Services.AuthenticationService
         {
             var user = await UserManager.FindByEmailAsync(loginCreds.EmailId);
 
-            TokenViewModel Token = new TokenViewModel { Name = user.FullName, UserId = user.Id };
+
+
+            TokenViewModel Token = new TokenViewModel { /*Name = loginCreds.Name,*/ UserId = user.Id };
 
             if (user != null && await UserManager.CheckPasswordAsync(user, loginCreds.Password))
             {

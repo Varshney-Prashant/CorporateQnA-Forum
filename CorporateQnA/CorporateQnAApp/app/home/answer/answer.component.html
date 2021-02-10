@@ -14,8 +14,7 @@
           <div class="pt-2 ml-4 font-size-16 font-weight-500 text-black line-height-1-6 mr-3">
                {{selectedQuestion.title}}
           </div>
-          <div class="ml-4 app-color font-arial font-size-12 line-height-1-6 mr-3">
-               {{selectedQuestion.description}}
+          <div class="ml-4 app-color font-arial font-size-12 line-height-1-6 mr-3" [innerHTML]="selectedQuestion.description">
           </div>
      </div>
      <div class="text-black font-weight-500 pl-4 noOfAnswers">
@@ -37,8 +36,7 @@
                     </div>
                </div>
                <div class="pt-2">
-                    <div class="pl-5 text-dark line-height-1-6 font-size-12 font-weight-500 font-arial mr-3">
-                         {{answer.description}}
+                    <div class="pl-5 text-dark line-height-1-6 font-size-12 font-weight-500 font-arial mr-3" [innerHTML]="answer.content">
                     </div>
                </div>
                <div class="pt-2 pl-5 font-size-14 pb-3">
@@ -59,7 +57,7 @@
                     <div class="d-flex justify-content-end">
                          <fa-icon [icon]="icons.expand" size="2x" class="pl-2 cursor-ptr" style="color:  rgb(131,131,131);" (click)="expandEditor()"></fa-icon>
                     </div> 
-                    <ngx-editor [editor]="editor" editable="true" [placeholder]="html" formControlName="editorContent" [ngClass]="{'expand-editor':expand}">                                
+                    <ngx-editor [editor]="editor" editable="true" placeholder="Enter Question Description" [(ngModel)]="html" formControlName="editorContent" [ngClass]="{'expand-editor':expand}">                                
                     </ngx-editor>        
                     <div class="d-flex">
                          <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"> </ngx-editor-menu>

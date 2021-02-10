@@ -60,7 +60,7 @@
                <div class="form-group col-sm-9">
                     <label>Description</label>
                     <div class="NgxEditor__Wrapper mb-3">
-                         <ngx-editor [editor]="editor" editable="true" [placeholder]="html" formControlName="description">                                
+                         <ngx-editor [editor]="editor" editable="true" placeholder="Enter Question Description" [(ngModel)]="html" formControlName="description">                                
                               </ngx-editor>        
                          <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"> </ngx-editor-menu>                                 
                     </div>

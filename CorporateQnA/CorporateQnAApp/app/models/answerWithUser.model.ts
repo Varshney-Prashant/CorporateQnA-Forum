@@ -1,6 +1,6 @@
 export class AnswerWithUser {
      answerId: number;
-     description: number;
+     content: number;
      userFullName: number;
      noOfLikes: number;
      noOfDislikes: number;
@@ -13,7 +13,7 @@ export class AnswerWithUser {
 
      constructor(args: any) {
           this.answerId = args.answerId;
-          this.description = args.description;
+          this.content = args.content;
           this.userFullName = args.userFullName;
           this.noOfLikes = args.noOfLikes;
           this.noOfDislikes = args.noOfDisLikes;

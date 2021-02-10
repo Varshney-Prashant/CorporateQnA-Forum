@@ -19,6 +19,7 @@ export class RegistrationComponent implements OnInit {
 	form!: FormGroup;
 	retUrl: string = "";
 	userId: number = 0;
+	profileImageUrl:string="";
 	mobileNumberPattern = "^((\\+91-?)|0)?[0-9]{10}$";
 	emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$"
 
@@ -39,17 +40,30 @@ export class RegistrationComponent implements OnInit {
 		})!;
 	}
 
+	onProfileChange(event: any) {
+		const reader = new FileReader();
+		if (event.target.files && event.target.files.length) {
+		  const [image] = event.target.files;
+		  reader.readAsDataURL(image);
+		  reader.onload = () => {
+		    this.profileImageUrl = reader.result as string;
+		//     this.service.formModel.patchValue({
+		// 	 ProfileImageUrl: ProfileImageUrl
+		//     })
+		  }
+		}
+	}
 	onSubmit() {
 		this.user.name = this.form.value.name;
 		this.user.emailId = this.form.value.email;
 		this.user.password = this.form.value.password;
 		this.user.designation=this.form.value.designation;
 		this.user.company=this.form.value.company;
-		this.user.imageUrl=this.form.value.imageUrl;
+		this.user.imageUrl=this.profileImageUrl
 
 		this.loginService.registerUser(this.user).subscribe(
 			(res: any) => {
-				if (res.succeeded) {
+				if (res=="user Added") {
 					this.toastr.success('LoggedIn', 'succesfully!');
 					this.loginService.loginUser(this.user).subscribe(
 						(res: any) => {

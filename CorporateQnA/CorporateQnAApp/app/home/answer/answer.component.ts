@@ -1,7 +1,7 @@
-import { Component, Input, OnInit, TemplateRef } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef} from 'ngx-bootstrap/modal';
 import { Editor, Toolbar } from 'ngx-editor';
 import { ToastrService } from 'ngx-toastr';
 
@@ -31,7 +31,7 @@ export class AnswerComponent implements OnInit {
 		['ordered_list', 'bullet_list'],
 		['blockquote', 'link']
 	];
-	html = 'Enter Your Answer Here';
+	html = '';
 	config = {
 		backdrop: false,
 		keybodard: true,
@@ -43,7 +43,6 @@ export class AnswerComponent implements OnInit {
 	constructor(
 		public answerService: AnswerService, 
 		private dateTimeService: DateTimeService, 
-		private modalService: BsModalService,
 		private toastr:ToastrService,
 		private questionService:QuestionService
 	) { }
@@ -72,7 +71,7 @@ export class AnswerComponent implements OnInit {
 		this.activeAnswer.postingTime=new Date();
 		this.activeAnswer.userId=localStorage.getItem('userId')!;
 		this.activeAnswer.questionId=this.questionId;
-		this.activeAnswer.description=this.answerForm.value['editorContent']['content'][0]['content'][0]['text'];
+		this.activeAnswer.content=this.html;
 		this.activeAnswer.bestAnswer=false
 		this.answerService.addAnswer(this.activeAnswer).subscribe(
 			res=>{		

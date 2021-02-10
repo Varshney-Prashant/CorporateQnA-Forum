@@ -30,7 +30,7 @@
 		</div>
 	</div>
 	<div class="pt-3 pr-3">
-		<label for="company" class="font-weight-bold text-white font-Roboto">Designation</label>
+		<label for="company" class="font-weight-bold text-white font-Roboto">Company</label>
 		<input type="text" class="d-block form-control pr-3 form-input" formControlName="company">
 		<div class="text-danger pt-1"
 			*ngIf="!(form.get('company') !).valid  && (form.get('company') !).touched ">
@@ -38,11 +38,11 @@
 		</div>
 	</div>
 	<div class="pt-3 pr-3">
-		<label for="imageUrl" class="font-weight-bold text-white font-Roboto">Designation</label>
-		<input type="text" class="d-block form-control pr-3 form-input" formControlName="imageUrl">
+		<label for="imageUrl" class="font-weight-bold text-white font-Roboto d-block">Image</label>
+		<input type="file" accept="image/*" (change)="onProfileChange($event)" formControlName="imageUrl" class="text-white ">
 		<div class="text-danger pt-1"
 			*ngIf="!(form.get('imageUrl') !).valid  && (form.get('imageUrl') !).touched ">
-			<div *ngIf="((form.get('imageUrl') !).errors !).required">*Designation is Required</div>
+			<div *ngIf="((form.get('imageUrl') !).errors !).required">*Image is Required</div>
 		</div>
 	</div>
 	<div class="pt-3 pr-3">

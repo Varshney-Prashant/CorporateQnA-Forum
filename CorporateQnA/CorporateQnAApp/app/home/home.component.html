@@ -14,8 +14,7 @@
                                    <i class="arrow up"></i>
                                    <div class="upvotes text-right">{{question.upVotes}}</div>
                               </div>
-                              <div class="font-size-12 question-description ml-2 pl-3 pr-3 mb-3 app-color font-arial">
-                                   {{question.description}}
+                              <div class="font-size-12 question-description ml-2 pl-3 pr-3 mb-3 app-color font-arial" [innerHTML]="question.description">
                               </div>                            
                          </div>
                          <div class="d-flex justify-content-between  ml-5 pl-3 pr-3 mb-3">

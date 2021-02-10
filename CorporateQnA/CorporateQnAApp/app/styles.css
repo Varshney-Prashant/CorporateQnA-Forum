@@ -204,8 +204,8 @@ select{
      height: 100%;
 }
 .arrow-icon{
-     padding-top: 50%;
-     padding-bottom: 50%;
+     position: relative;
+     top: 50%;
 }
 
 .selected-question{

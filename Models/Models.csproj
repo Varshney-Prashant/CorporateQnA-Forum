@@ -115,6 +115,10 @@
     <Compile Include="Migrations\202101310713327_imageUrl.Designer.cs">
       <DependentUpon>202101310713327_imageUrl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202102100608113_addEmployees.cs" />
+    <Compile Include="Migrations\202102100608113_addEmployees.Designer.cs">
+      <DependentUpon>202102100608113_addEmployees.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AuthenticationModels\ApplicationUser.cs" />
     <Compile Include="Models\AuthenticationModels\ApplicationUserManager.cs" />
@@ -122,6 +126,7 @@
     <Compile Include="Models\AuthenticationModels\AuthenticationContext.cs" />
     <Compile Include="Models\CoreModels\Answer.cs" />
     <Compile Include="Models\CoreModels\Category.cs" />
+    <Compile Include="Models\CoreModels\Employee.cs" />
     <Compile Include="Models\CoreModels\Question.cs" />
     <Compile Include="Models\CoreModels\QuestionActivity.cs" />
     <Compile Include="Models\Enums\QuestionStatus.cs" />
@@ -159,6 +164,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202101310713327_imageUrl.resx">
       <DependentUpon>202101310713327_imageUrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202102100608113_addEmployees.resx">
+      <DependentUpon>202102100608113_addEmployees.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

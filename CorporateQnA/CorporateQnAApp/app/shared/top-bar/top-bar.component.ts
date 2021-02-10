@@ -20,11 +20,15 @@ export class TopBarComponent implements OnInit {
 
 	ngOnInit(): void {
 		var userId=localStorage.getItem('userId') !
-		this.userService.getUser(userId).subscribe(
-			res=>{
-				this.user=res;
-			}
-		)
+		if(userId!=null){
+			this.userService.getUser(userId).subscribe(
+				res=>{
+					console.log(res)
+					this.user=res;
+				}
+			)
+		}
+		
 	}
 
 	logOut() {

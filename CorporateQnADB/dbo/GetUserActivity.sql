@@ -18,20 +18,20 @@ BEGIN
 
 	SELECT @questionsAnswered = COUNT(Answers.Id) 
 								FROM Answers 
-								FULL JOIN AspNetUsers
-								ON Answers.UserId=AspNetUsers.Id
+								FULL JOIN Employees
+								ON Answers.UserId=Employees.Id
 								WHERE userId=@UserId
 								AND Answers.IsDeleted=0
 	SELECT @questionsAsked =    COUNT(Questions.Id) 
 								FROM Questions
-								FULL JOIN AspNetUsers
-								ON Questions.UserId=AspNetUsers.Id
+								FULL JOIN Employees
+								ON Questions.UserId=Employees.Id
 								WHERE userId=@UserId 
 								AND Questions.IsDeleted=0
 	SELECT @questionsSolved =   COUNT(Questions.Id)
 								FROM Questions 
-								INNER JOIN AspNetUsers 
-								ON Questions.UserId = AspNetUsers.Id 
+								INNER JOIN Employees 
+								ON Questions.UserId = Employees.Id 
 								WHERE UserId=@UserId
 								AND Status=1 AND Questions.IsDeleted=0
 

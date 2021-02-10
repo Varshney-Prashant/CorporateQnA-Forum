@@ -43,7 +43,7 @@ export class FiltersComponent implements OnInit {
 		['ordered_list', 'bullet_list'],
 		['blockquote', 'link']
 	];
-	html = 'Enter Your Answer Here';
+	html = '';
 
 	@Output() filteredQuestions = new EventEmitter<QuestionWithUser[]>();
 	@Output() searchFilter = new EventEmitter<string>();
@@ -94,7 +94,7 @@ export class FiltersComponent implements OnInit {
 
 	addQuestion() {
 		this.question.title = this.addQuestionForm.value.question
-		this.question.description = this.addQuestionForm.value['description']['content'][0]['content'][0]['text'];
+		this.question.description = this.html;
 		this.question.status = QuestionStatus.unResolved;
 		this.question.postingTime = new Date();
 		this.question.userId = localStorage.getItem('userId')!;
@@ -106,6 +106,8 @@ export class FiltersComponent implements OnInit {
 				this.questionService.addActivity(this.questionActivity).subscribe();
 				this.toastr.success("Question Added", "Successfully")
 				this.getQuestions();
+				this.addQuestionForm.reset();
+				this.editor.setContent('');
 			}
 		)
 		this.closeModal();
@@ -116,6 +118,7 @@ export class FiltersComponent implements OnInit {
 	}
 
 	closeModal() {
+		this.addQuestionForm.reset();
 		this.modalRef.hide();
 	}
 

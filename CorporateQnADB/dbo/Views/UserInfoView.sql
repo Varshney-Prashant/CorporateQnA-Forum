@@ -10,5 +10,5 @@ NoOfLikes,
 NoOfDislikes,
 QuestionsAsked,
 QuestionsAnswered,
-QuestionsSolved FROM AspNetUsers AS Users
-CROSS APPLY GetUserActivity(Users.Id) AS UserActivity
+QuestionsSolved FROM Employees AS Employees
+CROSS APPLY GetUserActivity(Employees.Id) AS UserActivity

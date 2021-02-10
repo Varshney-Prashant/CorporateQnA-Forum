@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[Answers] (
     [Id]           INT            IDENTITY (1, 1) NOT NULL,
-    [Description]  NVARCHAR (MAX) NOT NULL,
+    [Content]      NVARCHAR (MAX) NOT NULL,
     [NoOfLikes]    INT            CONSTRAINT [DF_Answers_NoOfLikes] DEFAULT ((0)) NOT NULL,
     [NoOfDislikes] INT            CONSTRAINT [DF_Answers_NoOfDislikes] DEFAULT ((0)) NOT NULL,
     [PostingTime]  DATETIME       NOT NULL,

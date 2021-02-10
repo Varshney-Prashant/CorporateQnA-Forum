@@ -116,7 +116,7 @@ namespace CorporateQnAModels.Models.DataModels
     public partial class Answer : CorporateQNADB.Record<Answer>  
     {
 		public int Id { get; set; }
-		public string Description { get; set; }
+		public string Content { get; set; }
 		public int NoOfLikes { get; set; }
 		public int NoOfDislikes { get; set; }
 		public DateTime PostingTime { get; set; }
@@ -202,6 +202,20 @@ namespace CorporateQnAModels.Models.DataModels
 		public DateTime? DateDeleted { get; set; }
 	}
 
+	[TableName("dbo.Employees")]
+	public class Employee
+	{
+		public string Id { get; set; }
+		public string FullName { get; set; }
+		public string Designation { get; set; }
+		public string Company { get; set; }
+		public string ImageUrl { get; set; }
+		public int NoOfLikes { get; set; }
+		public int NoOfDislikes { get; set; }
+		public bool IsDeleted { get; set; }
+		public DateTime? DateDeleted { get; set; }
+	}
+
 	public class QuestionWithUserViewModel
 	{
 		public int QuestionId { get; set; }
@@ -223,7 +237,7 @@ namespace CorporateQnAModels.Models.DataModels
 	public class AnswerWithUserViewModel
 	{
 		public int AnswerId { get; set; }
-		public string Description { get; set; }
+		public string Content { get; set; }
 		public string UserFullName { get; set; }
 		public int NoOfLikes { get; set; }
 		public int NoOfDislikes { get; set; }

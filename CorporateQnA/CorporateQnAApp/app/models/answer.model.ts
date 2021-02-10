@@ -1,6 +1,6 @@
 export class Answer{
      id: number;
-     description: number;
+     content: string;
      noOfLikes: number;
      noOfDislikes: number;
      postingTime: Date;
@@ -10,7 +10,7 @@ export class Answer{
 
      constructor(args: any) {
           this.id = args.id;
-          this.description = args.description;
+          this.content = args.content;
           this.noOfLikes = args.noOfLikes;
           this.noOfDislikes = args.noOfDislikes;
           this.postingTime = args.postingTime;

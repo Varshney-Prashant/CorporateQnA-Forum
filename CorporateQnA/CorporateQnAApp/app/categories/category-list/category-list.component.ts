@@ -30,6 +30,7 @@ export class CategoryListComponent implements OnInit {
 		this.categoryService.getCategoryActivities().subscribe(
 			res => {
 				this.categories=res;
+				console.log(res)
 				this.isDataLoaded=true;
 			}
 		);

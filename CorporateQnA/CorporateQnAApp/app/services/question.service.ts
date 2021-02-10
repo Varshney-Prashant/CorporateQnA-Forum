@@ -25,6 +25,7 @@ export class QuestionService {
 	}
 
 	addQuestion(question: Question): Observable<number> {
+		console.log(question);
 		return this.httpClient.post<number>(this.apiUrl + '/add', question);
 	}
 
